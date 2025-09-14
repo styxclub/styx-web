@@ -1,0 +1,20 @@
+.header {
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--topbar-sticky-background);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
+    transition: background-color .5s, border-color .5s;
+
+    .header-inner {
+        height: 4rem;
+        padding: 0 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

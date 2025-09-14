@@ -1,0 +1,28 @@
+{
+  "name": "Styx Club",
+  "short_name": "Styx",
+  "description": "Aplicación web para el Club Styx.",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "start_url": "/",
+  "orientation": "portrait",
+  "id": "/",
+  "icons": [
+    {
+      "src": "img/icon-180x180.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "img/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
