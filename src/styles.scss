@@ -5,6 +5,7 @@
     --border-color: #3f3f46;
     --topbar-sticky-background: rgba(0, 0, 0, .3);
     --color-white: #fff;
+    --color-dark-grey: #3f3f46;
 }
 
 html {
@@ -14,14 +15,35 @@ html {
 html,
 body {
     font-family: var(--font-family);
+    height: 100%;
 }
 
 .flex {
     display: flex;
 }
 
+.flex-col {
+    flex-direction: column;
+}
+
+.center {
+    justify-content: center;
+}
+
+.end {
+    justify-content: flex-end;
+}
+
 .w-full {
     width: 100%;
+}
+
+.m-top {
+    margin-top: 1rem;
+}
+
+.gap-1 {
+    gap: .25rem;
 }
 
 .gap-4 {

@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
-import Header from './shared/header/header';
-import Menu from './shared/menu/menu';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [CardModule, ButtonModule, Header, Menu],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+  template: '<router-outlet />',
+  imports: [RouterOutlet],
 })
-export class App {}
+export default class App {}
