@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,6 +21,7 @@ import { MessageModule } from 'primeng/message';
     FloatLabel,
     FormsModule,
     ReactiveFormsModule,
+    NgOptimizedImage,
   ],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
