@@ -1,5 +1,10 @@
 import { Routes } from '@angular/router';
-//import AuthGuard from '@guard/auth-guard';
+import AuthGuard from '@guard/auth-guard';
+import ChatPageService from '@pages/chat-page/chat-page-service';
+import EventsPageService from '@pages/events-page/events-page-service';
+import HomePageService from '@pages/home-page/home-page-service';
+import ProfilePageService from '@pages/profile-page/profile-page-service';
+import { isDesktopMatch, isHandsetMatch } from '@shared/matchers';
 
 const routes: Routes = [
   {
@@ -8,25 +13,71 @@ const routes: Routes = [
   },
   {
     path: 'styx',
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     loadComponent: () => import('@layout/shell-layout/shell-layout').then((m) => m.default),
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'home' },
       {
         path: 'home',
-        loadComponent: () => import('@pages/home-page/home-page').then((m) => m.default),
+        canMatch: [isDesktopMatch],
+        providers: [HomePageService],
+        loadComponent: () =>
+          import('@pages/home-page/home-page-desktop/home-page-desktop').then((m) => m.default),
+      },
+      {
+        path: 'home',
+        canMatch: [isHandsetMatch],
+        providers: [HomePageService],
+        loadComponent: () =>
+          import('@pages/home-page/home-page-mobile/home-page-mobile').then((m) => m.default),
       },
       {
         path: 'events',
-        loadComponent: () => import('@pages/events-page/events-page').then((m) => m.default),
+        canMatch: [isDesktopMatch],
+        providers: [EventsPageService],
+        loadComponent: () =>
+          import('@pages/events-page/events-page-desktop/events-page-desktop').then(
+            (m) => m.default
+          ),
+      },
+      {
+        path: 'events',
+        canMatch: [isHandsetMatch],
+        providers: [EventsPageService],
+        loadComponent: () =>
+          import('@pages/events-page/events-page-mobile/events-page-mobile').then((m) => m.default),
       },
       {
         path: 'chat',
-        loadComponent: () => import('@pages/chat-page/chat-page').then((m) => m.default),
+        canMatch: [isDesktopMatch],
+        providers: [ChatPageService],
+        loadComponent: () =>
+          import('@pages/chat-page/chat-page-desktop/chat-page-desktop').then((m) => m.default),
+      },
+      {
+        path: 'chat',
+        canMatch: [isHandsetMatch],
+        providers: [ChatPageService],
+        loadComponent: () =>
+          import('@pages/chat-page/chat-page-mobile/chat-page-mobile').then((m) => m.default),
       },
       {
         path: 'profile',
-        loadComponent: () => import('@pages/profile-page/profile-page').then((m) => m.default),
+        canMatch: [isDesktopMatch],
+        providers: [ProfilePageService],
+        loadComponent: () =>
+          import('@pages/profile-page/profile-page-desktop/profile-page-desktop').then(
+            (m) => m.default
+          ),
+      },
+      {
+        path: 'profile',
+        canMatch: [isHandsetMatch],
+        providers: [ProfilePageService],
+        loadComponent: () =>
+          import('@pages/profile-page/profile-page-mobile/profile-page-mobile').then(
+            (m) => m.default
+          ),
       },
     ],
   },

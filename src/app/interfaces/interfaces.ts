@@ -1,3 +1,5 @@
+import { ParameterInterface } from '@interfaces/models/parameter.interfaces';
+
 export interface LoginPayload {
   username: string;
   password: string;
@@ -6,6 +8,9 @@ export interface LoginPayload {
 export interface UserSummary {
   id: number;
   username: string;
+  reputation: number;
+  votes: number;
+  credits: number;
 }
 
 export interface Tokens {
@@ -18,10 +23,12 @@ export interface LoginResponse {
   status: string;
   user: UserSummary;
   tokens: Tokens;
+  parameters: ParameterInterface[];
 }
 
 export interface SessionData {
   user: UserSummary | null;
+  parameters: ParameterInterface[];
   refresh_token?: string;
   access_token?: string;
   access_expires_at?: number;

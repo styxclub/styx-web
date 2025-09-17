@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChatPage } from './chat-page';
+import { HomePageMobile } from './home-page-mobile';
 
-describe('ChatPage', () => {
-  let component: ChatPage;
-  let fixture: ComponentFixture<ChatPage>;
+describe('HomePageMobile', () => {
+  let component: HomePageMobile;
+  let fixture: ComponentFixture<HomePageMobile>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChatPage]
+      imports: [HomePageMobile]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ChatPage);
+    fixture = TestBed.createComponent(HomePageMobile);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

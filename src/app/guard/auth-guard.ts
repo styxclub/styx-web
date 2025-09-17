@@ -3,11 +3,16 @@ import type { CanActivateFn } from '@angular/router';
 import { Router } from '@angular/router';
 import AuthStore from '@auth/auth-store';
 
-const AuthGuard: CanActivateFn = () => {
-  const store = inject(AuthStore);
+const AuthGuard: CanActivateFn = (): boolean => {
+  const store: AuthStore = inject(AuthStore);
   const router = inject(Router);
 
-  if (store.isAuthenticated()) return true;
+  console.log('en auth guard');
+  if (store.isAuthenticated()) {
+    console.log('is authenticated');
+    return true;
+  }
+  console.log('not authenticated, redirecting to /');
   router.navigateByUrl('/');
   return false;
 };

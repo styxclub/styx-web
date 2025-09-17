@@ -68,9 +68,10 @@ export default class LoginPage {
         username: this.username()!.value!,
         password: this.password()!.value!,
       });
+      console.log(response);
       this.authStore.applyLoginResponse(response);
       this.form.reset();
-      this.router.navigateByUrl('/styx/home');
+      this.router.navigate(['/styx/home']);
     } catch (e: unknown) {
       const msg: string =
         e instanceof Error ? e.message : 'Nombre de usuario o contraseña incorrectos.';
