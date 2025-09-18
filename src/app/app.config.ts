@@ -1,6 +1,8 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
+  inject,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
@@ -11,12 +13,14 @@ import {
   withViewTransitions,
 } from '@angular/router';
 import routes from '@app/app.routes';
+import AuthStore from '@auth/auth-store';
 import AuthInterceptor from '@interceptors/auth-interceptor';
 import Aura from '@primeuix/themes/aura';
 import { providePrimeNG } from 'primeng/config';
 
 const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(() => inject(AuthStore).hydrate()),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(

@@ -68,7 +68,6 @@ export default class LoginPage {
         username: this.username()!.value!,
         password: this.password()!.value!,
       });
-      console.log(response);
       this.authStore.applyLoginResponse(response);
       this.form.reset();
       this.router.navigate(['/styx/home']);

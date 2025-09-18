@@ -1,11 +1,19 @@
+@import "primeicons/primeicons.css";
+
 :root {
     --font-family: 'Inter var', Inter, system-ui, -apple-system, 'Segoe UI', Roboto,
         'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji',
         'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --border-color: #3f3f46;
+    --border-radius: 6px;
     --topbar-sticky-background: rgba(0, 0, 0, .3);
     --color-white: #fff;
     --color-dark-grey: #3f3f46;
+    --color-green: #34d399;
+    --color-green-light: #6ee7b7;
+    --space-sm: .5rem;
+    --space-md: 1rem;
+    --font-sm: .75rem;
 }
 
 html {
@@ -16,6 +24,7 @@ html,
 body {
     font-family: var(--font-family);
     height: 100%;
+    margin: 0;
 }
 
 .flex {

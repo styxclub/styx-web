@@ -11,6 +11,7 @@ export interface UserSummary {
   reputation: number;
   votes: number;
   credits: number;
+  bio: string;
 }
 
 export interface Tokens {
@@ -33,3 +34,5 @@ export interface SessionData {
   access_token?: string;
   access_expires_at?: number;
 }
+
+export type PhotoSize = 'sm' | 'md' | 'xl';

@@ -58,8 +58,6 @@ export default class AuthStore {
         (p: ParameterInterface): Parameter => new Parameter().fromInterface(p)
       )
     );
-    console.log(this._user());
-    console.log(this._parameters());
 
     const now: number = Date.now();
     const expiresAt: number = now + res.tokens.expires_in * 1000;

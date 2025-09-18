@@ -1,0 +1,9 @@
+<div class="photo-container"
+     [class]="`photo-${size()}`">
+    @if (imageSrc()) {
+    <img [src]="imageSrc()"
+         [alt]="`Imagen ${id()}`" />
+    } @else {
+    ...
+    }
+</div>

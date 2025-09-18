@@ -1,18 +1,21 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { CanMatchFn } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { map, take } from 'rxjs/operators';
 
-export function isHandsetMatch(): Observable<boolean> {
+export const isHandsetMatch: CanMatchFn = (): Observable<boolean> => {
   const bo: BreakpointObserver = inject(BreakpointObserver);
-  return bo
-    .observe([Breakpoints.Handset])
-    .pipe(map((res: BreakpointState): boolean => res.breakpoints[Breakpoints.Handset] === true));
-}
+  return bo.observe(Breakpoints.Handset).pipe(
+    map((state: BreakpointState): boolean => state.matches),
+    take(1)
+  );
+};
 
-export function isDesktopMatch(): Observable<boolean> {
+export const isDesktopMatch: CanMatchFn = (): Observable<boolean> => {
   const bo: BreakpointObserver = inject(BreakpointObserver);
-  return bo
-    .observe([Breakpoints.Web])
-    .pipe(map((res: BreakpointState): boolean => res.breakpoints[Breakpoints.Web] === true));
-}
+  return bo.observe(Breakpoints.Handset).pipe(
+    map((state: BreakpointState): boolean => !state.matches),
+    take(1)
+  );
+};

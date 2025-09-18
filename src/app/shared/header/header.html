@@ -1,3 +1,13 @@
 <div class="header">
-    <div class="header-inner">Styx</div>
+    <div class="header-inner">STYX</div>
+    <div class="header-options">
+        <div class="user-credits"
+             [pTooltip]="`Tienes ${credits()} créditos disponibles`">
+            <i class="pi pi-dollar"></i>
+            {{credits()}}
+        </div>
+        <p-button icon="pi pi-power-off"
+                  pTooltip="Cerrar sesión"
+                  (onClick)="logout()" />
+    </div>
 </div>

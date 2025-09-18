@@ -1,14 +1,14 @@
 .menu {
     position: fixed;
-    bottom: 16px;
+    bottom: var(--space-md);
     width: 80%;
     left: 10%;
     display: flex;
     box-sizing: border-box;
     border: 1px solid var(--border-color);
     background-color: var(--topbar-sticky-background);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(var(--space-sm));
+    backdrop-filter: blur(var(--space-sm));
     border-radius: 26px;
 
     a {
@@ -20,8 +20,17 @@
         align-items: center;
         justify-content: center;
 
+        span {
+            display: inline-block;
+            margin-left: var(--space-sm);
+        }
+
         &.active {
-            color: var(--color-white);
+            color: var(--color-green);
+
+            &:hover {
+                color: var(--color-green-light);
+            }
         }
     }
 }

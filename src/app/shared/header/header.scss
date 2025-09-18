@@ -1,20 +1,37 @@
 .header {
     border-bottom: 1px solid var(--border-color);
     background-color: var(--topbar-sticky-background);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(var(--space-sm));
+    backdrop-filter: blur(var(--space-sm));
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1100;
     transition: background-color .5s, border-color .5s;
+    display: flex;
+    align-items: center;
 
     .header-inner {
-        height: 4rem;
-        padding: 0 4rem;
+        height: 3rem;
+        padding-left: 2rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex: 1;
+    }
+
+    .header-options {
+        padding-right: 2rem;
+        display: flex;
+
+        .user-credits {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            display: flex;
+            margin-right: var(--space-sm);
+            align-items: center;
+            padding: 0 2rem;
+        }
     }
 }

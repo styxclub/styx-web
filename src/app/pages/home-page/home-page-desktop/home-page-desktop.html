@@ -1,1 +1,33 @@
-home
+<div class="home-container">
+    <div class="col-left">
+        <div class="user">
+            <div class="user-data">
+                <div class="user-photo">
+                    <app-user-photo [id]="1"
+                                    size="md" />
+                </div>
+                <div class="user-info">
+                    <div class="user-name">{{username()}}</div>
+                    <div class="user-reputation">
+                        <i class="pi pi-star"></i>
+                        {{reputation()}} ({{votes()}})
+                    </div>
+                </div>
+            </div>
+            <div class="user-bio">
+                @if (bio() === null) {
+                Escribe algo para que te conozcan mejor.
+                }
+                @else {
+                {{bio()}}
+                }
+                <p-button icon="pi pi-pencil"
+                          [rounded]="true"
+                          [text]="true"
+                          severity="success"
+                          class="bio-button" />
+            </div>
+        </div>
+    </div>
+    <div class="col-main"></div>
+</div>
