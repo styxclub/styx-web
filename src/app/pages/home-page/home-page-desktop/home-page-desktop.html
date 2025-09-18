@@ -25,8 +25,14 @@
                           [rounded]="true"
                           [text]="true"
                           severity="success"
-                          class="bio-button" />
+                          class="bio-button"
+                          pTooltip="Editar bio" />
             </div>
+        </div>
+        <div class="chats">
+            @for (chat of chats(); track chat.id) {
+            <app-user-message [chat]="chat" />
+            }
         </div>
     </div>
     <div class="col-main"></div>

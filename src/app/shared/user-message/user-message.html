@@ -1,1 +1,21 @@
-<p>user-message works!</p>
+<div class="user-message">
+    <div class="user-photo">
+        <app-user-photo [id]="chat().idUserFrom" />
+    </div>
+    <div class="user-message-content">
+        <div class="user-message-header">
+            <a [routerLink]="['/styx/chat', chat().idUserFrom]"
+               class="user-message-name">
+                {{chat().username}}
+            </a>
+            <div class="user-message-date">
+                {{chat().date}}
+                <br>
+                {{chat().hour}}
+            </div>
+        </div>
+        <div class="user-message-body">
+            {{chat().body}}
+        </div>
+    </div>
+</div>

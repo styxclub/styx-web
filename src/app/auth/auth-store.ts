@@ -1,4 +1,5 @@
-import { Injectable, WritableSignal, computed, effect, signal } from '@angular/core';
+import { Injectable, WritableSignal, computed, effect, inject, signal } from '@angular/core';
+import ClassMapperService from '@app/services/class-mapper-service';
 import { LoginResponse, SessionData, UserSummary } from '@interfaces/interfaces';
 import { ParameterInterface } from '@interfaces/models/parameter.interfaces';
 import Parameter from '@model/parameter.model';
@@ -7,6 +8,8 @@ const LS_KEY = 'styx.session.v1';
 
 @Injectable({ providedIn: 'root' })
 export default class AuthStore {
+  private classMapperService: ClassMapperService = inject(ClassMapperService);
+
   private _user: WritableSignal<UserSummary | null> = signal<UserSummary | null>(null);
   private _parameters: WritableSignal<any[]> = signal<Parameter[]>([]);
   private _accessToken = signal<string | null>(null);
@@ -38,11 +41,7 @@ export default class AuthStore {
     try {
       const data = JSON.parse(raw) as SessionData;
       this._user.set(data.user ?? null);
-      this._parameters.set(
-        (data.parameters ?? []).map(
-          (p: ParameterInterface): Parameter => new Parameter().fromInterface(p)
-        )
-      );
+      this._parameters.set(this.classMapperService.getParameters(data.parameters ?? []));
       this._refreshToken.set(data.refresh_token ?? null);
       this._accessToken.set(data.access_token ?? null);
       this._accessExpires.set(data.access_expires_at ?? null);
@@ -53,11 +52,7 @@ export default class AuthStore {
 
   applyLoginResponse(res: LoginResponse): void {
     this._user.set(res.user);
-    this._parameters.set(
-      (res.parameters ?? []).map(
-        (p: ParameterInterface): Parameter => new Parameter().fromInterface(p)
-      )
-    );
+    this._parameters.set(this.classMapperService.getParameters(res.parameters ?? []));
 
     const now: number = Date.now();
     const expiresAt: number = now + res.tokens.expires_in * 1000;

@@ -13,6 +13,7 @@ import {
   withViewTransitions,
 } from '@angular/router';
 import routes from '@app/app.routes';
+import provideCore from '@app/core';
 import AuthStore from '@auth/auth-store';
 import AuthInterceptor from '@interceptors/auth-interceptor';
 import Aura from '@primeuix/themes/aura';
@@ -38,6 +39,7 @@ const appConfig: ApplicationConfig = {
         },
       },
     }),
+    provideCore(),
   ],
 };
 

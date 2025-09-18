@@ -1,0 +1,46 @@
+.user-message {
+    display: flex;
+    padding: var(--space-sm) 0;
+    border-bottom: 2px solid var(--border-color);
+
+    .user-photo {
+        width: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .user-message-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-right: var(--space-sm);
+
+        .user-message-header {
+            display: flex;
+            margin-bottom: var(--space-sm);
+
+            .user-message-name {
+                flex: 1;
+                color: var(--color-green);
+                text-decoration: none;
+
+                &:hover {
+                    color: var(--color-green-light);
+                }
+            }
+
+            .user-message-date {
+                text-align: right;
+                font-size: var(--font-sm);
+            }
+        }
+
+        .user-message-body {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--space-sm);
+            font-size: var(--font-sm);
+        }
+    }
+}
