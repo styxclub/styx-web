@@ -35,5 +35,13 @@
             }
         </div>
     </div>
-    <div class="col-main"></div>
+    <div class="col-main">
+        @for (item of boardItems(); track item.id + item.kind) {
+        @if (isMessage(item)) {
+        <app-message-item [message]="item" />
+        } @else if (isRequest(item)) {
+        <app-request-item [request]="item" />
+        }
+        }
+    </div>
 </div>
