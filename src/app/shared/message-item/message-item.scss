@@ -1,0 +1,33 @@
+.message-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
+
+    .message-item-header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: var(--space-sm);
+        padding-bottom: var(--space-sm);
+
+        .message-item-user {
+            display: flex;
+            flex: 1;
+
+            span {
+                margin-left: var(--space-sm);
+            }
+        }
+
+        .messate-item-date {}
+    }
+
+    .message-item-title {
+        margin-bottom: var(--space-sm);
+    }
+
+    .message-item-body {
+        font-size: var(--font-sm);
+    }
+}

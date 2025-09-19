@@ -21,7 +21,7 @@ export default class Request {
 
   fromInterface(rp: RequestPayload): Request {
     this.id = rp.id;
-    this.user = new User(rp.idUser, rp.username);
+    this.user = new User(rp.idUser, rp.username, null, rp.reputation, rp.votes);
     this.title = rp.title;
     this.body = rp.body;
     this.reward = rp.reward;
@@ -33,5 +33,14 @@ export default class Request {
     this.isEnrolled = rp.isEnrolled === 1;
     this.enrollmentStatus = rp.enrollmentStatus;
     return this;
+  }
+
+  get date(): string | null {
+    if (this.createdAt === null || this.createdAt === '') {
+      return null;
+    }
+    const date: string[] = this.createdAt.split(' ');
+    const dateParts: string[] = date[0].split('-');
+    return `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
   }
 }

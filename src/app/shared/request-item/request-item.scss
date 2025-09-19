@@ -1,0 +1,44 @@
+.request-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
+
+    .request-item-header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: var(--space-sm);
+        padding-bottom: var(--space-sm);
+
+        .request-item-user {
+            display: flex;
+            flex: 1;
+
+            .request-item-user-info {
+                margin-left: var(--space-sm);
+
+                span {
+                    font-size: var(--font-sm);
+                }
+            }
+        }
+
+        .request-item-date {}
+    }
+
+    .request-item-title {
+        display: block;
+        color: var(--color-green);
+        text-decoration: none;
+        margin-bottom: var(--space-sm);
+
+        &:hover {
+            color: var(--color-green-light);
+        }
+    }
+
+    .request-item-body {
+        font-size: var(--font-sm);
+    }
+}

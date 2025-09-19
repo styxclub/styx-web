@@ -32,4 +32,13 @@ export default class Message {
       createdAt: this.createdAt,
     };
   }
+
+  get date(): string | null {
+    if (this.createdAt === null || this.createdAt === '') {
+      return null;
+    }
+    const date: string[] = this.createdAt.split(' ');
+    const dateParts: string[] = date[0].split('-');
+    return `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+  }
 }

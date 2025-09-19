@@ -6,6 +6,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
   withComponentInputBinding,
@@ -21,7 +22,7 @@ import { providePrimeNG } from 'primeng/config';
 
 const appConfig: ApplicationConfig = {
   providers: [
-    provideAppInitializer(() => inject(AuthStore).hydrate()),
+    provideAppInitializer((): void => inject(AuthStore).hydrate()),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(
@@ -31,6 +32,7 @@ const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
     ),
     provideHttpClient(withInterceptors([AuthInterceptor])),
+    provideAnimations(),
     providePrimeNG({
       theme: {
         preset: Aura,

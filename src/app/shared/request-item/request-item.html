@@ -1,1 +1,22 @@
-<p>request-item works!</p>
+@if (idUser) {
+<div class="request-item">
+    <div class="request-item-header">
+        <div class="request-item-user">
+            <app-user-photo [id]="idUser" />
+            <div class="request-item-user-info">
+                {{request().user?.username}}
+                <br>
+                <span>
+                    <i class="pi pi-star"></i> {{request().user?.reputation}} ({{request().user?.votes}})
+                </span>
+            </div>
+        </div>
+        <div class="request-item-date">
+            {{request().date}}
+        </div>
+    </div>
+    <a [routerLink]="['/styx/chat', idUser, request().id]"
+       class="request-item-title">{{request().title}}</a>
+    <div class="request-item-body">{{request().body}}</div>
+</div>
+}

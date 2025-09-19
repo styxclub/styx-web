@@ -1,1 +1,13 @@
-<p>message-item works!</p>
+<div class="message-item">
+    <div class="message-item-header">
+        <div class="message-item-user">
+            <app-user-photo [id]="message().idUser" />
+            <span>{{message().username}}</span>
+        </div>
+        <div class="messate-item-date">
+            {{message().date}}
+        </div>
+    </div>
+    <div class="message-item-title">{{message().title}}</div>
+    <div class="message-item-body">{{message().body}}</div>
+</div>

@@ -57,5 +57,19 @@
         }
     }
 
-    .col-main {}
+    .col-main {
+        flex: 1;
+        padding: var(--space-sm);
+
+        .board-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+
+            .board-title {
+                flex: 1;
+                font-size: var(--font-xl);
+            }
+        }
+    }
 }

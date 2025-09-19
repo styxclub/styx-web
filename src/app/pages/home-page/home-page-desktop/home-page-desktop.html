@@ -36,6 +36,14 @@
         </div>
     </div>
     <div class="col-main">
+        <div class="board-header">
+            <div class="board-title">Tablón de noticias</div>
+            <p-menu #menu
+                    [model]="items"
+                    [popup]="true" />
+            <p-button (click)="menu.toggle($event)"
+                      icon="pi pi-ellipsis-v" />
+        </div>
         @for (item of boardItems(); track item.id + item.kind) {
         @if (isMessage(item)) {
         <app-message-item [message]="item" />
