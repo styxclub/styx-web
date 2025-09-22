@@ -27,9 +27,9 @@ export default class AuthStore {
       const data: SessionData = {
         user: this._user(),
         parameters: this._parameters().map((p: Parameter): ParameterInterface => p.toInterface()),
-        refresh_token: this._refreshToken() ?? undefined,
-        access_token: this._accessToken() ?? undefined,
-        access_expires_at: this._accessExpires() ?? undefined,
+        refreshToken: this._refreshToken() ?? undefined,
+        accessToken: this._accessToken() ?? undefined,
+        accessExpiresAt: this._accessExpires() ?? undefined,
       };
       localStorage.setItem(LS_KEY, JSON.stringify(data));
     });
@@ -42,9 +42,9 @@ export default class AuthStore {
       const data = JSON.parse(raw) as SessionData;
       this._user.set(data.user ?? null);
       this._parameters.set(this.classMapperService.getParameters(data.parameters ?? []));
-      this._refreshToken.set(data.refresh_token ?? null);
-      this._accessToken.set(data.access_token ?? null);
-      this._accessExpires.set(data.access_expires_at ?? null);
+      this._refreshToken.set(data.refreshToken ?? null);
+      this._accessToken.set(data.accessToken ?? null);
+      this._accessExpires.set(data.accessExpiresAt ?? null);
     } catch (err) {
       console.error(err);
     }
@@ -55,12 +55,12 @@ export default class AuthStore {
     this._parameters.set(this.classMapperService.getParameters(res.parameters ?? []));
 
     const now: number = Date.now();
-    const expiresAt: number = now + res.tokens.expires_in * 1000;
-    this._accessToken.set(res.tokens.access_token);
+    const expiresAt: number = now + res.tokens.expiresIn * 1000;
+    this._accessToken.set(res.tokens.accessToken);
     this._accessExpires.set(expiresAt);
 
-    if (res.tokens.refresh_token) {
-      this._refreshToken.set(res.tokens.refresh_token);
+    if (res.tokens.refreshToken) {
+      this._refreshToken.set(res.tokens.refreshToken);
     }
   }
 

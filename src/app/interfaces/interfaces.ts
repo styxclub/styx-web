@@ -12,12 +12,13 @@ export interface UserSummary {
   votes: number;
   credits: number;
   bio: string;
+  isActive: boolean;
 }
 
 export interface Tokens {
-  access_token: string;
-  expires_in: number;
-  refresh_token?: string;
+  accessToken: string;
+  expiresIn: number;
+  refreshToken?: string;
 }
 
 export interface LoginResponse {
@@ -30,9 +31,9 @@ export interface LoginResponse {
 export interface SessionData {
   user: UserSummary | null;
   parameters: ParameterInterface[];
-  refresh_token?: string;
-  access_token?: string;
-  access_expires_at?: number;
+  refreshToken?: string;
+  accessToken?: string;
+  accessExpiresAt?: number;
 }
 
 export type PhotoSize = 'sm' | 'md' | 'xl';

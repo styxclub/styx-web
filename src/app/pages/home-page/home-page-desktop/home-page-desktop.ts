@@ -57,7 +57,6 @@ export default class HomePageDesktop implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const response: BoardResponse = await this.homePageService.getHome();
-    console.log(response);
     if (response.chats.length > 0) {
       this.chats.set(this.classMapperService.getChats(response.chats));
     }

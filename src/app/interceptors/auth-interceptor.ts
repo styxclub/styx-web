@@ -25,9 +25,9 @@ const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: Htt
         // intentar refrescar y reintentar una vez
         return from(auth.refresh(refresh)).pipe(
           switchMap((tokens) => {
-            store.applyTokens(tokens.access_token, tokens.expires_in, tokens.refresh_token);
+            store.applyTokens(tokens.accessToken, tokens.expiresIn, tokens.refreshToken);
             const retry = withAuth.clone({
-              setHeaders: { Authorization: `Bearer ${tokens.access_token}` },
+              setHeaders: { Authorization: `Bearer ${tokens.accessToken}` },
             });
             return next(retry);
           }),
