@@ -19,10 +19,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
 
         span {
-            display: inline-block;
-            margin-left: var(--space-sm);
+            display: block;
         }
 
         &.active {
@@ -30,6 +30,19 @@
 
             &:hover {
                 color: var(--color-green-light);
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .menu {
+        a {
+            flex-direction: row;
+
+            span {
+                display: inline-block;
+                margin-left: var(--space-sm);
             }
         }
     }
