@@ -7,19 +7,19 @@
                                     size="md" />
                 </div>
                 <div class="user-info">
-                    <div class="user-name">{{username()}}</div>
+                    <div class="user-name">{{ username }}</div>
                     <div class="user-reputation">
                         <i class="pi pi-star"></i>
-                        {{reputation()}} ({{votes()}})
+                        {{ reputation }} ({{ votes }})
                     </div>
                 </div>
             </div>
             <div class="user-bio">
-                @if (bio() === null) {
+                @if (bio === null || bio === undefined) {
                 Escribe algo para que te conozcan mejor.
                 }
                 @else {
-                {{bio()}}
+                {{ bio }}
                 }
                 <p-button icon="pi pi-pencil"
                           [rounded]="true"

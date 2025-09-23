@@ -1,1 +1,61 @@
-<p>home-page-mobile works!</p>
+<p-tabs value="0">
+    <p-tablist>
+        <p-tab value="0">Últimos mensajes</p-tab>
+        <p-tab value="1">Noticias</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+        <p-tabpanel value="0">
+            <div class="user">
+                <div class="user-data">
+                    <div class="user-photo">
+                        <app-user-photo [id]="1"
+                                        size="md" />
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">{{ username }}</div>
+                        <div class="user-reputation">
+                            <i class="pi pi-star"></i>
+                            {{ reputation }} ({{ votes }})
+                        </div>
+                    </div>
+                </div>
+                <div class="user-bio">
+                    @if (bio === null || bio === undefined) {
+                    Escribe algo para que te conozcan mejor.
+                    }
+                    @else {
+                    {{ bio }}
+                    }
+                    <p-button icon="pi pi-pencil"
+                              [rounded]="true"
+                              [text]="true"
+                              severity="success"
+                              class="bio-button"
+                              pTooltip="Editar bio" />
+                </div>
+            </div>
+            <div class="chats">
+                @for (chat of chats(); track chat.id) {
+                <app-user-message [chat]="chat" />
+                }
+            </div>
+        </p-tabpanel>
+        <p-tabpanel value="1">
+            <div class="board-header">
+                <div class="board-title">Tablón de noticias</div>
+                <p-menu #menu
+                        [model]="items"
+                        [popup]="true" />
+                <p-button (click)="menu.toggle($event)"
+                          icon="pi pi-ellipsis-v" />
+            </div>
+            @for (item of boardItems(); track item.id + item.kind) {
+            @if (isMessage(item)) {
+            <app-message-item [message]="item" />
+            } @else if (isRequest(item)) {
+            <app-request-item [request]="item" />
+            }
+            }
+        </p-tabpanel>
+    </p-tabpanels>
+</p-tabs>

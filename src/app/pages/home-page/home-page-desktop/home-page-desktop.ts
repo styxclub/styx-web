@@ -1,11 +1,8 @@
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
-import AuthStore from '@auth/auth-store';
-import { BoardResponse } from '@interfaces/home.interfaces';
 import Chat from '@model/chat.model';
 import Message from '@model/message.model';
 import Request from '@model/request.model';
 import HomePageService from '@pages/home-page/home-page-service';
-import ClassMapperService from '@services/class-mapper-service';
 import MessageItem from '@shared/message-item/message-item';
 import RequestItem from '@shared/request-item/request-item';
 import UserMessage from '@shared/user-message/user-message';
@@ -22,62 +19,28 @@ import { Tooltip } from 'primeng/tooltip';
   styleUrl: './home-page-desktop.scss',
 })
 export default class HomePageDesktop implements OnInit {
-  private authStore: AuthStore = inject(AuthStore);
   private homePageService: HomePageService = inject(HomePageService);
-  private classMapperService: ClassMapperService = inject(ClassMapperService);
 
-  username: WritableSignal<string | undefined> = signal<string | undefined>(
-    this.authStore.user()?.username
-  );
-  reputation: WritableSignal<number | undefined> = signal<number | undefined>(
-    this.authStore.user()?.reputation
-  );
-  votes: WritableSignal<number | undefined> = signal<number | undefined>(
-    this.authStore.user()?.votes
-  );
-  bio: WritableSignal<string | undefined> = signal<string | undefined>(this.authStore.user()?.bio);
+  username: string | undefined = this.homePageService.username;
+  reputation: number | undefined = this.homePageService.reputation;
+  votes: number | undefined = this.homePageService.votes;
+  bio: string | null | undefined = this.homePageService.bio;
   chats: WritableSignal<Chat[]> = signal<Chat[]>([]);
   boardItems: WritableSignal<(Message | Request)[]> = signal<(Message | Request)[]>([]);
 
-  items: MenuItem[] = [
-    {
-      label: 'Options',
-      items: [
-        {
-          label: 'Refresh',
-          icon: 'pi pi-refresh',
-        },
-        {
-          label: 'Export',
-          icon: 'pi pi-upload',
-        },
-      ],
-    },
-  ];
+  items: MenuItem[] = this.homePageService.items;
 
   async ngOnInit(): Promise<void> {
-    const response: BoardResponse = await this.homePageService.getHome();
-    if (response.chats.length > 0) {
-      this.chats.set(this.classMapperService.getChats(response.chats));
-    }
-    const items: (Message | Request)[] = response.board.map((it: any): Message | Request => {
-      if (it.kind === 'message') {
-        const m: Message = new Message().fromInterface(it.payload);
-        (m as any).kind = 'message';
-        return m;
-      } else {
-        const r: Request = new Request().fromInterface(it.payload);
-        (r as any).kind = 'request';
-        return r;
-      }
-    });
-    this.boardItems.set(items);
+    await this.homePageService.loadHome();
+    this.chats.set(this.homePageService.chats);
+    this.boardItems.set(this.homePageService.boardItems);
   }
 
   isMessage(item: Message | Request): item is Message {
-    return (item as any).kind === 'message';
+    return this.homePageService.isMessage(item);
   }
+
   isRequest(item: Message | Request): item is Request {
-    return (item as any).kind === 'request';
+    return this.homePageService.isRequest(item);
   }
 }

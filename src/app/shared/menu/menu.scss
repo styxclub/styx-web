@@ -23,6 +23,8 @@
 
         span {
             display: block;
+            font-size: var(--font-sm);
+            margin-top: 2px;
         }
 
         &.active {
@@ -42,7 +44,9 @@
 
             span {
                 display: inline-block;
+                font-size: var(--font-md);
                 margin-left: var(--space-sm);
+                margin-top: 0;
             }
         }
     }
