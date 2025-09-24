@@ -22,6 +22,7 @@ export interface MessagePayload {
 export interface RequestParameter {
   idParameter: number;
   title: string;
+  body: string;
   type: number;
   num: number;
   valueString: string | null;

@@ -18,5 +18,45 @@
     <a [routerLink]="['/styx/chat', idUser, request().id]"
        class="request-item-title">{{request().title}}</a>
     <div class="request-item-body">{{request().body}}</div>
+    <div class="request-item-footer">
+        <div class="request-item-info">
+            <div class="request-item-reward">
+                <span [pTooltip]="`Recompensa: ${request().reward} créditos`">
+                    <i class="pi pi-dollar"></i> {{request().reward}}
+                </span>
+            </div>
+            <div class="request-item-parameters">
+                @for (parameter of request().parameters; track parameter.idParameter) {
+                <div class="request-item-parameter">
+                    {{ parameter.title }}
+                    @if (parameter.num > 1) {
+                    x{{ parameter.num }}
+                    }
+                    @if (parameter.valueString !== null) {
+                    - {{ parameter.valueString }}
+                    }
+                    @if (parameter.valueNum !== null) {
+                    - {{ parameter.valueNum }}
+                    }
+                </div>
+                }
+            </div>
+        </div>
+        <div class="request-item-enrollment">
+            <div class="request-item-enrolled">
+                Apuntados: {{ request().participantsTotal }} <span class="spacer">-</span> Aceptados: {{ request().participantsAccepted }}
+            </div>
+            <div class="request-item-action">
+                @if (request().isEnrolled) {
+                <p-button label="Desapúntate"
+                          severity="danger" />
+                }
+                @else {
+                <p-button label="Apúntate!"
+                          severity="success" />
+                }
+            </div>
+        </div>
+    </div>
 </div>
 }

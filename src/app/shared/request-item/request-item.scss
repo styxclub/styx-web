@@ -40,5 +40,86 @@
 
     .request-item-body {
         font-size: var(--font-sm);
+        margin-bottom: var(--space-sm);
+    }
+
+    .request-item-footer {
+        display: flex;
+        flex-direction: column;
+
+        .request-item-info {
+            display: flex;
+
+            .request-item-reward {
+                display: flex;
+                align-items: center;
+                margin-right: var(--space-sm);
+                min-width: 65px;
+
+                span {
+                    border: 1px solid var(--border-color);
+                    border-radius: var(--border-radius);
+                    padding: var(--space-sm);
+                }
+            }
+
+            .request-item-parameters {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+
+                .request-item-parameter {
+                    border: 1px solid var(--border-color);
+                    border-radius: var(--border-radius);
+                    padding: var(--space-sm);
+                    margin-right: var(--space-sm);
+                    margin-bottom: var(--space-sm);
+                }
+            }
+        }
+
+        .request-item-enrollment {
+            margin-top: var(--space-sm);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            .request-item-enrolled {
+                font-weight: bold;
+
+                .spacer {
+                    display: none;
+                }
+            }
+
+            .request-item-action {
+                margin-left: var(--space-sm);
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .request-item {
+        .request-item-footer {
+            flex-direction: row;
+            justify-content: space-between;
+
+            .request-item-info {
+                .request-item-parameters {
+                    .request-item-parameter {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+
+            .request-item-enrollment {
+                .request-item-enrolled {
+                    .spacer {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
     }
 }

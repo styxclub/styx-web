@@ -22,7 +22,8 @@
                                formControlName="username"
                                [invalid]="isInvalid('username')"
                                class="w-full"
-                               autocomplete="off" />
+                               autocomplete="off"
+                               autocapitalize="none" />
                         <label for="username">Usuario</label>
                     </p-floatlabel>
                     @if (isInvalid('username')) {

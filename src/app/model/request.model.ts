@@ -1,5 +1,5 @@
-import { RequestPayload } from '@app/interfaces/home.interfaces';
-import User from './user.model';
+import { RequestParameter, RequestPayload } from '@interfaces/home.interfaces';
+import User from '@model/user.model';
 
 export default class Request {
   kind: string = 'message';
@@ -16,7 +16,8 @@ export default class Request {
     public participantsTotal: number | null = null,
     public participantsAccepted: number | null = null,
     public isEnrolled: boolean = false,
-    public enrollmentStatus: number | null = null
+    public enrollmentStatus: number | null = null,
+    public parameters: RequestParameter[] = []
   ) {}
 
   fromInterface(rp: RequestPayload): Request {
@@ -32,6 +33,7 @@ export default class Request {
     this.participantsAccepted = rp.participantsAccepted;
     this.isEnrolled = rp.isEnrolled === 1;
     this.enrollmentStatus = rp.enrollmentStatus;
+    this.parameters = rp.parameters;
     return this;
   }
 
