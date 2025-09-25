@@ -27,6 +27,7 @@ export default class PopupEnrolledDirective implements OnDestroy {
 
   /** Inputs a pasar al componente PopupEnrolled */
   popupEnrolledInput: InputSignal<RequestEnrolled[]> = input.required<RequestEnrolled[]>();
+  popupEnrolledShow: InputSignal<boolean> = input<boolean>(true);
 
   /** Separación respecto al cursor (px) */
   offset: InputSignal<number> = input<number>(12);
@@ -35,6 +36,9 @@ export default class PopupEnrolledDirective implements OnDestroy {
   private el?: HTMLElement;
 
   onEnter(ev: MouseEvent | { clientX: number; clientY: number }): void {
+    if (!this.popupEnrolledShow()) {
+      return;
+    }
     const Cmp: Type<PopupEnrolled> = PopupEnrolled;
     if (!Cmp || this.ref) {
       // Si ya está creado, solo reposiciona

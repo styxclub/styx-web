@@ -3,7 +3,10 @@
     <div class="request-item-header">
         <div class="request-item-user">
             <app-user-photo [id]="idUser" />
-            <div class="request-item-user-info">
+            <div class="request-item-user-info"
+                 popupUser
+                 [popupUserInput]="idUser"
+                 [popupUserShow]="!isMobile()">
                 {{request().user?.username}}
                 <br>
                 <span>
@@ -27,11 +30,11 @@
             </div>
             <div class="request-item-parameters">
                 @for (parameter of request().parameters; track parameter.idParameter) {
-                @if (!isMobile()) {
                 <div class="request-item-parameter"
                      popupParameter
-                     [popupParameterInput]="parameter.idParameter">
-                    {{ parameter.title }}
+                     [popupParameterInput]="parameter.idParameter"
+                     [popupParameterShow]="!isMobile()">
+                    <span [class.request-item-parameter-mobile]="isMobile()">{{ parameter.title }}</span>
                     @if (parameter.num > 1) {
                     x{{ parameter.num }}
                     }
@@ -42,39 +45,17 @@
                     - {{ parameter.valueNum }}
                     }
                 </div>
-                }
-                @else {
-                <div class="request-item-parameter"
-                     (click)="showParameter(parameter)">
-                    <span class="request-item-parameter-mobile">{{ parameter.title }}</span>
-                    @if (parameter.num > 1) {
-                    x{{ parameter.num }}
-                    }
-                    @if (parameter.valueString !== null) {
-                    - {{ parameter.valueString }}
-                    }
-                    @if (parameter.valueNum !== null) {
-                    - {{ parameter.valueNum }}
-                    }
-                </div>
-                }
                 }
             </div>
         </div>
         <div class="request-item-enrollment">
-            @if (!isMobile()) {
             <div class="request-item-enrolled"
+                 [class.request-item-enrolled-mobile]="isMobile()"
                  popupEnrolled
-                 [popupEnrolledInput]="request().enrolled">
+                 [popupEnrolledInput]="request().enrolled"
+                 [popupEnrolledShow]="!isMobile()">
                 Apuntados: {{ request().participantsTotal }} <span class="spacer">-</span> Aceptados: {{ request().participantsAccepted }}
             </div>
-            }
-            @else {
-            <div class="request-item-enrolled request-item-enrolled-mobile"
-                 (click)="showEnrolled(request().enrolled)">
-                Apuntados: {{ request().participantsTotal }} <span class="spacer">-</span> Aceptados: {{ request().participantsAccepted }}
-            </div>
-            }
             <div class="request-item-action">
                 @if (request().isEnrolled) {
                 <p-button label="Desapúntate"

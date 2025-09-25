@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ParameterInterface } from '@app/interfaces/models/parameter.interfaces';
-import Parameter from '@app/model/parameter.model';
 import { ChatInterface } from '@interfaces/models/chat.interfaces';
+import { ParameterInterface } from '@interfaces/models/parameter.interfaces';
+import { UserInterface } from '@interfaces/models/user.interfaces';
 import Chat from '@model/chat.model';
+import Parameter from '@model/parameter.model';
+import User from '@model/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +27,16 @@ export default class ClassMapperService {
   getChats(cs: ChatInterface[]): Chat[] {
     return cs.map((c: ChatInterface): Chat => {
       return this.getChat(c);
+    });
+  }
+
+  getUser(u: UserInterface): User {
+    return new User().fromInterface(u, true);
+  }
+
+  getUsers(us: UserInterface[]): User[] {
+    return us.map((u: UserInterface): User => {
+      return this.getUser(u);
     });
   }
 }

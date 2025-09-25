@@ -5,7 +5,10 @@
     <div class="user-message-content">
         <div class="user-message-header">
             <a [routerLink]="['/styx/chat', chat().idUserFrom]"
-               class="user-message-name">
+               class="user-message-name"
+               popupUser
+               [popupUserInput]="chat().idUserFrom"
+               [popupUserShow]="!isMobile()">
                 {{chat().username}}
             </a>
             <div class="user-message-date">

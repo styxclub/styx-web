@@ -26,6 +26,7 @@ export default class PopupParameterDirective implements OnDestroy {
 
   /** Inputs a pasar al componente PopupParameter */
   popupParameterInput: InputSignal<number> = input.required<number>();
+  popupParameterShow: InputSignal<boolean> = input<boolean>(true);
 
   /** Separación respecto al cursor (px) */
   offset: InputSignal<number> = input<number>(12);
@@ -34,6 +35,9 @@ export default class PopupParameterDirective implements OnDestroy {
   private el?: HTMLElement;
 
   onEnter(ev: MouseEvent | { clientX: number; clientY: number }): void {
+    if (!this.popupParameterShow()) {
+      return;
+    }
     const Cmp: Type<PopupParameter> = PopupParameter;
     if (!Cmp || this.ref) {
       // Si ya está creado, solo reposiciona

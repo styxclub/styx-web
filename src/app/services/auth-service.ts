@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { LoginPayload, LoginResponse, Tokens } from '@interfaces/interfaces';
+import { UserResponse } from '@interfaces/user.interfaces';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -31,9 +32,9 @@ export default class AuthService {
     );
   }
 
-  async getUserInfo(id: number): Promise<void> {
-    await firstValueFrom(
-      this.http.post<void>(`${this.apiUrl}/auth/get-user-info`, {
+  async getUserInfo(id: number): Promise<UserResponse> {
+    return await firstValueFrom(
+      this.http.post<UserResponse>(`${this.apiUrl}/auth/get-user-info`, {
         id,
       })
     );

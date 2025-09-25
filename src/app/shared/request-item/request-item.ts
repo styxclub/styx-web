@@ -6,6 +6,7 @@ import PopupEnrolled from '@shared/popup-enrolled/popup-enrolled';
 import PopupEnrolledDirective from '@shared/popup-enrolled/popup-enrolled-directive';
 import PopupParameter from '@shared/popup-parameter/popup-parameter';
 import PopupParameterDirective from '@shared/popup-parameter/popup-parameter-directive';
+import PopupUserDirective from '@shared/popup-user/popup-user-directive';
 import UserPhoto from '@shared/user-photo/user-photo';
 import { ButtonModule } from 'primeng/button';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -17,6 +18,7 @@ import { TooltipModule } from 'primeng/tooltip';
     UserPhoto,
     PopupParameterDirective,
     PopupEnrolledDirective,
+    PopupUserDirective,
     RouterLink,
     ButtonModule,
     TooltipModule,

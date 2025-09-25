@@ -1,1 +1,26 @@
-<p>popup-user works!</p>
+@if (user() !== null) {
+<div class="popup-user"
+     [class.fixed]="!isMobile()">
+    <div class="popup-user-header">
+        <div class="popup-user-photo">
+            <app-user-photo [id]="idUser()" />
+        </div>
+        <div class="popup-user-info">
+            {{ user()?.username }}
+            <span>
+                <i class="pi pi-star"></i> {{ user()?.reputation }} ({{ user()?.votes }})
+            </span>
+        </div>
+    </div>
+    <div class="popup-user-bio">
+        {{ user()?.bio }}
+    </div>
+    <div class="popup-user-intos">
+        @for (into of (user()?.intos || []); track into.id) {
+        <div class="popup-user-into">
+            {{ into.name }}
+        </div>
+        }
+    </div>
+</div>"
+}

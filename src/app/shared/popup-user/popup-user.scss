@@ -1,0 +1,56 @@
+.popup-user {
+    background: var(--background-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    padding: var(--space-sm);
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    min-width: 200px;
+
+    &.fixed {
+        position: fixed;
+    }
+
+    .popup-user-header {
+        display: flex;
+        padding: var(--space-sm);
+        align-items: center;
+
+        .popup-user-photo {
+            margin-right: var(--space-sm);
+        }
+
+        .popup-user-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+            span {
+                margin-top: var(--space-sm);
+            }
+        }
+    }
+
+    .popup-user-bio {
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        padding: var(--space-sm);
+        font-size: var(--font-sm);
+    }
+
+    .popup-user-intos {
+        margin-top: var(--space-sm);
+        display: flex;
+        flex-wrap: wrap;
+
+        .popup-user-into {
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            padding: var(--space-sm);
+            font-size: var(--font-sm);
+            margin-right: var(--space-sm);
+            margin-bottom: var(--space-sm);
+        }
+    }
+}
