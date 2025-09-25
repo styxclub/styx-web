@@ -33,6 +33,7 @@ export default class RequestItem implements OnInit {
       width: '75vw',
       modal: true,
       closable: true,
+      focusOnShow: false,
       data: { id: parameter.idParameter },
     });
   }
