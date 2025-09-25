@@ -1,4 +1,3 @@
-// src/app/shared/tooltip/hover-follow-tooltip.directive.ts
 import {
   ComponentRef,
   Directive,
@@ -6,35 +5,29 @@ import {
   EnvironmentInjector,
   inject,
   input,
+  inputBinding,
   InputSignal,
   OnDestroy,
   Type,
   ViewContainerRef,
 } from '@angular/core';
+import PopupParameter from '@shared/popup-parameter/popup-parameter';
 
 @Directive({
-  selector: '[appHoverFollowTooltip]',
+  selector: '[popupParameter]',
   host: {
     '(mouseenter)': 'onEnter($event)',
     '(mousemove)': 'onMove($event)',
     '(mouseleave)': 'onLeave()',
   },
 })
-export default class HoverFollowTooltipDirective implements OnDestroy {
+export default class PopupParameterDirective implements OnDestroy {
   private readonly vcr: ViewContainerRef = inject(ViewContainerRef);
   private readonly env: EnvironmentInjector = inject(EnvironmentInjector);
   private readonly hostEl: ElementRef<HTMLElement> = inject(ElementRef<HTMLElement>);
 
-  /** Componente a mostrar como popup/tooltip (p.ej. PopupParameter) */
-  tooltipComponent: InputSignal<Type<unknown>> = input.required<Type<unknown>>({
-    alias: 'appHoverFollowTooltip',
-  });
-
-  /** Inputs a pasar al componente tooltip (p.ej. { title, body }) */
-  tooltipInputs: InputSignal<Record<string, unknown> | null> = input<Record<
-    string,
-    unknown
-  > | null>(null);
+  /** Inputs a pasar al componente PopupParameter */
+  popupParameterInput: InputSignal<number> = input.required<number>();
 
   /** Separación respecto al cursor (px) */
   offset: InputSignal<number> = input<number>(12);
@@ -43,14 +36,17 @@ export default class HoverFollowTooltipDirective implements OnDestroy {
   private el?: HTMLElement;
 
   onEnter(ev: MouseEvent | { clientX: number; clientY: number }): void {
-    const Cmp: Type<unknown> = this.tooltipComponent();
+    const Cmp: Type<PopupParameter> = PopupParameter;
     if (!Cmp || this.ref) {
       // Si ya está creado, solo reposiciona
       if (this.ref && this.el) this.positionAt(ev.clientX, ev.clientY);
       return;
     }
 
-    this.ref = this.vcr.createComponent(Cmp, { environmentInjector: this.env });
+    this.ref = this.vcr.createComponent(Cmp, {
+      environmentInjector: this.env,
+      bindings: [inputBinding('id', this.popupParameterInput)],
+    });
     this.el = this.ref.location.nativeElement as HTMLElement;
 
     // Estilos base del contenedor host del componente
@@ -60,13 +56,6 @@ export default class HoverFollowTooltipDirective implements OnDestroy {
     style.top = '0px';
     style.zIndex = '10000';
     style.pointerEvents = 'none';
-
-    // Pasar inputs (si los hay)
-    const inputs: Record<string, unknown> | null = this.tooltipInputs();
-    if (inputs && this.ref.instance && typeof this.ref.instance === 'object') {
-      Object.assign(this.ref.instance as object, inputs);
-    }
-    this.ref.changeDetectorRef.detectChanges();
 
     // Añadir al body (evita clipping por overflow)
     document.body.appendChild(this.el);

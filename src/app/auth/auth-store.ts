@@ -11,7 +11,7 @@ export default class AuthStore {
   private classMapperService: ClassMapperService = inject(ClassMapperService);
 
   private _user: WritableSignal<UserSummary | null> = signal<UserSummary | null>(null);
-  private _parameters: WritableSignal<any[]> = signal<Parameter[]>([]);
+  private _parameters: WritableSignal<Parameter[]> = signal<Parameter[]>([]);
   private _accessToken = signal<string | null>(null);
   private _accessExpires = signal<number | null>(null); // epoch ms
   private _refreshToken = signal<string | null>(null); // si no usas cookie
@@ -87,6 +87,10 @@ export default class AuthStore {
 
   parameters(): Parameter[] {
     return this._parameters();
+  }
+
+  getParameterById(id: number): Parameter | null {
+    return this._parameters().find((p: Parameter): boolean => p.id === id) ?? null;
   }
 
   accessToken(): string | null {

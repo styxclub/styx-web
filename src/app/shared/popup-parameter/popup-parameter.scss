@@ -7,4 +7,14 @@
     z-index: 1000;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     pointer-events: none;
+
+    .popup-parameter-title {
+        margin-bottom: var(--space-sm);
+    }
+
+    .popup-parameter-body {
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: var(--space-sm);
+    }
 }

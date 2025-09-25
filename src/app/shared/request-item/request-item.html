@@ -27,7 +27,9 @@
             </div>
             <div class="request-item-parameters">
                 @for (parameter of request().parameters; track parameter.idParameter) {
-                <div class="request-item-parameter">
+                <div class="request-item-parameter"
+                     popupParameter
+                     [popupParameterInput]="parameter.idParameter">
                     {{ parameter.title }}
                     @if (parameter.num > 1) {
                     x{{ parameter.num }}

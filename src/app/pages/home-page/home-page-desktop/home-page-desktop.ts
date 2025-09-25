@@ -1,14 +1,4 @@
-import {
-  Component,
-  ComponentRef,
-  inject,
-  OnInit,
-  signal,
-  viewChild,
-  ViewContainerRef,
-  WritableSignal,
-} from '@angular/core';
-import PopupParameter from '@app/shared/popup-parameter/popup-parameter';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import Chat from '@model/chat.model';
 import Message from '@model/message.model';
 import Request from '@model/request.model';
@@ -24,16 +14,7 @@ import { Tooltip } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-home-page-desktop',
-  imports: [
-    UserPhoto,
-    UserMessage,
-    MessageItem,
-    RequestItem,
-    PopupParameter,
-    ButtonModule,
-    Tooltip,
-    MenuModule,
-  ],
+  imports: [UserPhoto, UserMessage, MessageItem, RequestItem, ButtonModule, Tooltip, MenuModule],
   templateUrl: './home-page-desktop.html',
   styleUrl: './home-page-desktop.scss',
 })
@@ -49,9 +30,6 @@ export default class HomePageDesktop implements OnInit {
 
   items: MenuItem[] = this.homePageService.items;
 
-  private readonly container = viewChild(ViewContainerRef);
-  private parameterRef: ComponentRef<PopupParameter> | null = null;
-
   async ngOnInit(): Promise<void> {
     await this.homePageService.loadHome();
     this.chats.set(this.homePageService.chats);
@@ -64,28 +42,5 @@ export default class HomePageDesktop implements OnInit {
 
   isRequest(item: Message | Request): item is Request {
     return this.homePageService.isRequest(item);
-  }
-
-  showTooltip(event: MouseEvent, name: string): void {
-    this.container()?.clear();
-    this.parameterRef = this.container().createComponent(PopupParameter);
-    this.parameterRef.instance.title.set(name);
-    this.updatePosition(event);
-  }
-
-  moveTooltip(event: MouseEvent): void {
-    if (this.parameterRef) {
-      this.updatePosition(event);
-    }
-  }
-
-  hideTooltip(): void {
-    this.container()?.clear();
-    this.parameterRef = null;
-  }
-
-  private updatePosition(event: MouseEvent): void {
-    const position = { x: event.clientX + 10, y: event.clientY + 10 };
-    this.parameterRef?.instance.position.set(position);
   }
 }
