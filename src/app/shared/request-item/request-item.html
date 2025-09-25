@@ -27,6 +27,7 @@
             </div>
             <div class="request-item-parameters">
                 @for (parameter of request().parameters; track parameter.idParameter) {
+                @if (!isMobile()) {
                 <div class="request-item-parameter"
                      popupParameter
                      [popupParameterInput]="parameter.idParameter">
@@ -41,6 +42,22 @@
                     - {{ parameter.valueNum }}
                     }
                 </div>
+                }
+                @else {
+                <div class="request-item-parameter"
+                     (click)="showParameter(parameter)">
+                    {{ parameter.title }}
+                    @if (parameter.num > 1) {
+                    x{{ parameter.num }}
+                    }
+                    @if (parameter.valueString !== null) {
+                    - {{ parameter.valueString }}
+                    }
+                    @if (parameter.valueNum !== null) {
+                    - {{ parameter.valueNum }}
+                    }
+                </div>
+                }
                 }
             </div>
         </div>

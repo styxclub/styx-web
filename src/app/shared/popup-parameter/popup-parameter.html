@@ -1,4 +1,9 @@
+@if (!isMobile()) {
 <div class="popup-parameter">
     <div class="popup-parameter-title">{{ title() }}</div>
     <div class="popup-parameter-body">{{ body() }}</div>
 </div>
+}
+@else {
+<div class="popup-parameter-body">{{ body() }}</div>
+}

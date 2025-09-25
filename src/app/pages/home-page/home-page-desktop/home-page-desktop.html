@@ -48,7 +48,8 @@
         @if (isMessage(item)) {
         <app-message-item [message]="item" />
         } @else if (isRequest(item)) {
-        <app-request-item [request]="item" />
+        <app-request-item [request]="item"
+                          [isMobile]="false" />
         }
         }
     </div>
