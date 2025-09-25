@@ -1,0 +1,10 @@
+.popup-parameter {
+    position: fixed;
+    background: var(--background-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    padding: var(--space-sm);
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}

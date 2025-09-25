@@ -1,1 +1,6 @@
-<p>popup-parameter works!</p>
+<div class="popup-parameter"
+     [style.left.px]="position().x"
+     [style.top.px]="position().y">
+    <div class="popup-parameter-title">{{ title() }}</div>
+    <div class="popup-parameter-body">{{ body() }}</div>
+</div>

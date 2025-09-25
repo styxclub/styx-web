@@ -37,3 +37,8 @@ export interface SessionData {
 }
 
 export type PhotoSize = 'sm' | 'md' | 'xl';
+
+export interface PositionInterface {
+  x: number;
+  y: number;
+}
