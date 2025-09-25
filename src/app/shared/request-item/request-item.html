@@ -62,9 +62,19 @@
             </div>
         </div>
         <div class="request-item-enrollment">
-            <div class="request-item-enrolled">
+            @if (!isMobile()) {
+            <div class="request-item-enrolled"
+                 popupEnrolled
+                 [popupEnrolledInput]="request().enrolled">
                 Apuntados: {{ request().participantsTotal }} <span class="spacer">-</span> Aceptados: {{ request().participantsAccepted }}
             </div>
+            }
+            @else {
+            <div class="request-item-enrolled request-item-enrolled-mobile"
+                 (click)="showEnrolled(request().enrolled)">
+                Apuntados: {{ request().participantsTotal }} <span class="spacer">-</span> Aceptados: {{ request().participantsAccepted }}
+            </div>
+            }
             <div class="request-item-action">
                 @if (request().isEnrolled) {
                 <p-button label="Desapúntate"

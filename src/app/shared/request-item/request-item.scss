@@ -94,6 +94,10 @@
                 .spacer {
                     display: none;
                 }
+
+                &.request-item-enrolled-mobile {
+                    color: var(--color-green);
+                }
             }
 
             .request-item-action {

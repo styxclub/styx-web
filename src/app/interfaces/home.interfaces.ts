@@ -29,6 +29,14 @@ export interface RequestParameter {
   valueNum: number | null;
 }
 
+export interface RequestEnrolled {
+  idUser: number;
+  username: string;
+  reputation: number;
+  votes: number;
+  status: number;
+}
+
 export interface RequestPayload {
   id: number;
   idUser: number;
@@ -46,6 +54,7 @@ export interface RequestPayload {
   isEnrolled: 0 | 1;
   enrollmentStatus: number | null;
   parameters: RequestParameter[];
+  enrolled: RequestEnrolled[];
 }
 
 export interface BoardItem extends BoardItemBase {

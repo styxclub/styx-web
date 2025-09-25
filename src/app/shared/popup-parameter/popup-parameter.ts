@@ -19,8 +19,8 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 })
 export default class PopupParameter implements OnInit {
   authStore: AuthStore = inject(AuthStore);
+  config: DynamicDialogConfig = inject(DynamicDialogConfig);
 
-  public config: DynamicDialogConfig = inject(DynamicDialogConfig);
   id: InputSignal<number | null> = input<number | null>(null);
   title: WritableSignal<string> = signal<string>('');
   body: WritableSignal<string> = signal<string>('');

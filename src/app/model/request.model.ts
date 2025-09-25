@@ -1,4 +1,4 @@
-import { RequestParameter, RequestPayload } from '@interfaces/home.interfaces';
+import { RequestEnrolled, RequestParameter, RequestPayload } from '@interfaces/home.interfaces';
 import User from '@model/user.model';
 
 export default class Request {
@@ -17,7 +17,8 @@ export default class Request {
     public participantsAccepted: number | null = null,
     public isEnrolled: boolean = false,
     public enrollmentStatus: number | null = null,
-    public parameters: RequestParameter[] = []
+    public parameters: RequestParameter[] = [],
+    public enrolled: RequestEnrolled[] = []
   ) {}
 
   fromInterface(rp: RequestPayload): Request {
@@ -34,6 +35,7 @@ export default class Request {
     this.isEnrolled = rp.isEnrolled === 1;
     this.enrollmentStatus = rp.enrollmentStatus;
     this.parameters = rp.parameters;
+    this.enrolled = rp.enrolled;
     return this;
   }
 

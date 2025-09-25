@@ -10,22 +10,23 @@ import {
   Type,
   ViewContainerRef,
 } from '@angular/core';
-import PopupParameter from '@shared/popup-parameter/popup-parameter';
+import { RequestEnrolled } from '@interfaces/home.interfaces';
+import PopupEnrolled from '@shared/popup-enrolled/popup-enrolled';
 
 @Directive({
-  selector: '[popupParameter]',
+  selector: '[popupEnrolled]',
   host: {
     '(mouseenter)': 'onEnter($event)',
     '(mousemove)': 'onMove($event)',
     '(mouseleave)': 'onLeave()',
   },
 })
-export default class PopupParameterDirective implements OnDestroy {
+export default class PopupEnrolledDirective implements OnDestroy {
   private readonly vcr: ViewContainerRef = inject(ViewContainerRef);
   private readonly env: EnvironmentInjector = inject(EnvironmentInjector);
 
-  /** Inputs a pasar al componente PopupParameter */
-  popupParameterInput: InputSignal<number> = input.required<number>();
+  /** Inputs a pasar al componente PopupEnrolled */
+  popupEnrolledInput: InputSignal<RequestEnrolled[]> = input.required<RequestEnrolled[]>();
 
   /** Separación respecto al cursor (px) */
   offset: InputSignal<number> = input<number>(12);
@@ -34,7 +35,7 @@ export default class PopupParameterDirective implements OnDestroy {
   private el?: HTMLElement;
 
   onEnter(ev: MouseEvent | { clientX: number; clientY: number }): void {
-    const Cmp: Type<PopupParameter> = PopupParameter;
+    const Cmp: Type<PopupEnrolled> = PopupEnrolled;
     if (!Cmp || this.ref) {
       // Si ya está creado, solo reposiciona
       if (this.ref && this.el) this.positionAt(ev.clientX, ev.clientY);
@@ -43,7 +44,7 @@ export default class PopupParameterDirective implements OnDestroy {
 
     this.ref = this.vcr.createComponent(Cmp, {
       environmentInjector: this.env,
-      bindings: [inputBinding('id', this.popupParameterInput)],
+      bindings: [inputBinding('enrolled', this.popupEnrolledInput)],
     });
     this.el = this.ref.location.nativeElement as HTMLElement;
 

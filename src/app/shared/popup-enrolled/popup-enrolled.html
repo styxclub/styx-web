@@ -1,1 +1,21 @@
-<p>popup-enrolled works!</p>
+<div class="popup-enrolled"
+     [class.fixed]="!isMobile()">
+    @for (enrollment of (enrolled() || []); track enrollment.idUser){
+    <div class="popup-enrolled-user">
+        <div class="user-photo">
+            <app-user-photo [id]="enrollment.idUser" />
+        </div>
+        <div class="user-info">
+            {{ enrollment.username }}
+            <span>
+                <i class="pi pi-star"></i> {{enrollment.reputation}} ({{enrollment.votes}})
+            </span>
+        </div>
+        @if (enrollment.status === 1) {
+        <div class="user-accepted">
+            <i class="pi pi-check-circle"></i>
+        </div>
+        }
+    </div>
+    }
+</div>
