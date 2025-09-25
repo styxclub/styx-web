@@ -6,7 +6,9 @@
             <app-user-photo [id]="idUser()" />
         </div>
         <div class="popup-user-info">
-            {{ user()?.username }}
+            @if (!isMobile()) {
+            <label>{{ user()?.username }}</label>
+            }
             <span>
                 <i class="pi pi-star"></i> {{ user()?.reputation }} ({{ user()?.votes }})
             </span>

@@ -18,6 +18,10 @@
             .request-item-user-info {
                 margin-left: var(--space-sm);
 
+                .request-item-user-info-mobile {
+                    color: var(--color-green);
+                }
+
                 span {
                     font-size: var(--font-sm);
                 }

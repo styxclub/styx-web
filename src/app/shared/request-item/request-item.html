@@ -6,8 +6,9 @@
             <div class="request-item-user-info"
                  popupUser
                  [popupUserInput]="idUser"
-                 [popupUserShow]="!isMobile()">
-                {{request().user?.username}}
+                 [popupUserShow]="!isMobile()"
+                 (click)="showUser(idUser, request().user?.username || '')">
+                <label [class.request-item-user-info-mobile]="isMobile()">{{request().user?.username}}</label>
                 <br>
                 <span>
                     <i class="pi pi-star"></i> {{request().user?.reputation}} ({{request().user?.votes}})
@@ -34,7 +35,8 @@
                      popupParameter
                      [popupParameterInput]="parameter.idParameter"
                      [popupParameterShow]="!isMobile()">
-                    <span [class.request-item-parameter-mobile]="isMobile()">{{ parameter.title }}</span>
+                    <span [class.request-item-parameter-mobile]="isMobile()"
+                          (click)="showParameter(parameter)">{{ parameter.title }}</span>
                     @if (parameter.num > 1) {
                     x{{ parameter.num }}
                     }
@@ -53,7 +55,8 @@
                  [class.request-item-enrolled-mobile]="isMobile()"
                  popupEnrolled
                  [popupEnrolledInput]="request().enrolled"
-                 [popupEnrolledShow]="!isMobile()">
+                 [popupEnrolledShow]="!isMobile()"
+                 (click)="showEnrolled(request().enrolled)">
                 Apuntados: {{ request().participantsTotal }} <span class="spacer">-</span> Aceptados: {{ request().participantsAccepted }}
             </div>
             <div class="request-item-action">
