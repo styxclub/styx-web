@@ -46,7 +46,7 @@
                 @else {
                 <div class="request-item-parameter"
                      (click)="showParameter(parameter)">
-                    {{ parameter.title }}
+                    <span class="request-item-parameter-mobile">{{ parameter.title }}</span>
                     @if (parameter.num > 1) {
                     x{{ parameter.num }}
                     }

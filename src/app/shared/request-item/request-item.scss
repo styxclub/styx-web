@@ -74,6 +74,10 @@
                     padding: var(--space-sm);
                     margin-right: var(--space-sm);
                     margin-bottom: var(--space-sm);
+
+                    .request-item-parameter-mobile {
+                        color: var(--color-green);
+                    }
                 }
             }
         }
