@@ -55,15 +55,19 @@ export default class HomePageService {
 
   items: MenuItem[] = [
     {
-      label: 'Options',
+      label: 'Filtrar',
       items: [
         {
-          label: 'Refresh',
-          icon: 'pi pi-refresh',
+          label: 'Todos',
+          icon: 'pi pi-book',
         },
         {
-          label: 'Export',
-          icon: 'pi pi-upload',
+          label: 'Noticias',
+          icon: 'pi pi-sparkles',
+        },
+        {
+          label: 'Eventos',
+          icon: 'pi pi-calendar',
         },
       ],
     },

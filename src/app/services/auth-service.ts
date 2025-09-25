@@ -30,4 +30,12 @@ export default class AuthService {
       })
     );
   }
+
+  async getUserInfo(id: number): Promise<void> {
+    await firstValueFrom(
+      this.http.post<void>(`${this.apiUrl}/auth/get-user-info`, {
+        id,
+      })
+    );
+  }
 }
