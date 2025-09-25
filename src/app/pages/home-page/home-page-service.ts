@@ -2,7 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import AuthStore from '@auth/auth-store';
 import { environment } from '@env/environment';
-import { BoardResponse } from '@interfaces/home.interfaces';
+import {
+  BoardItem,
+  BoardResponse,
+  MessagePayload,
+  MessagesResponse,
+  RequestPayload,
+  RequestsResponse,
+} from '@interfaces/home.interfaces';
 import Chat from '@model/chat.model';
 import Message from '@model/message.model';
 import Request from '@model/request.model';
@@ -53,25 +60,43 @@ export default class HomePageService {
     return this._boardItems();
   }
 
-  items: MenuItem[] = [
-    {
-      label: 'Filtrar',
-      items: [
-        {
-          label: 'Todos',
-          icon: 'pi pi-book',
-        },
-        {
-          label: 'Noticias',
-          icon: 'pi pi-sparkles',
-        },
-        {
-          label: 'Eventos',
-          icon: 'pi pi-calendar',
-        },
-      ],
-    },
-  ];
+  items: MenuItem[] = [];
+  private onLoadHome!: () => void;
+  private onLoadMessages!: () => void;
+  private onLoadRequests!: () => void;
+
+  setMenuCommands(commands: {
+    onLoadHome: () => void;
+    onLoadMessages: () => void;
+    onLoadRequests: () => void;
+  }): void {
+    this.onLoadHome = commands.onLoadHome;
+    this.onLoadMessages = commands.onLoadMessages;
+    this.onLoadRequests = commands.onLoadRequests;
+
+    this.items = [
+      {
+        label: 'Filtrar',
+        items: [
+          {
+            label: 'Todos',
+            icon: 'pi pi-book',
+            command: (): void => this.onLoadHome(),
+          },
+          {
+            label: 'Noticias',
+            icon: 'pi pi-sparkles',
+            command: (): void => this.onLoadMessages(),
+          },
+          {
+            label: 'Eventos',
+            icon: 'pi pi-calendar',
+            command: (): void => this.onLoadRequests(),
+          },
+        ],
+      },
+    ];
+  }
 
   async getHome(page: number = 0, limit: number = 20): Promise<BoardResponse> {
     const url = `${this.apiUrl}/home/get-home`;
@@ -83,18 +108,51 @@ export default class HomePageService {
     if (response.chats.length > 0) {
       this._chats.set(this.classMapperService.getChats(response.chats));
     }
-    const items: (Message | Request)[] = response.board.map((it: any): Message | Request => {
+    const items: (Message | Request)[] = response.board.map((it: BoardItem): Message | Request => {
       if (it.kind === 'message') {
-        const m: Message = new Message().fromInterface(it.payload);
+        const m: Message = new Message().fromInterface(it.payload as MessagePayload);
         (m as any).kind = 'message';
         return m;
       } else {
-        const r: Request = new Request().fromInterface(it.payload);
+        const r: Request = new Request().fromInterface(it.payload as RequestPayload);
         (r as any).kind = 'request';
         return r;
       }
     });
     this._boardItems.set(items);
+  }
+
+  async getMessages(page: number = 0, limit: number = 20): Promise<MessagesResponse> {
+    const url = `${this.apiUrl}/home/get-messages`;
+    return await firstValueFrom(this.http.post<MessagesResponse>(url, { page, limit }));
+  }
+
+  async loadMessages(page: number = 0, limit: number = 20): Promise<void> {
+    const response: MessagesResponse = await this.getMessages(page, limit);
+    if (response.messages.length > 0) {
+      this._boardItems.set(
+        response.messages.map(
+          (m: BoardItem): Message => new Message().fromInterface(m.payload as MessagePayload)
+        )
+      );
+      console.log(this._boardItems());
+    }
+  }
+
+  async getRequests(page: number = 0, limit: number = 20): Promise<RequestsResponse> {
+    const url = `${this.apiUrl}/home/get-requests`;
+    return await firstValueFrom(this.http.post<RequestsResponse>(url, { page, limit }));
+  }
+
+  async loadRequests(page: number = 0, limit: number = 20): Promise<void> {
+    const response: RequestsResponse = await this.getRequests(page, limit);
+    if (response.requests.length > 0) {
+      this._boardItems.set(
+        response.requests.map(
+          (m: BoardItem): Request => new Request().fromInterface(m.payload as RequestPayload)
+        )
+      );
+    }
   }
 
   isMessage(item: Message | Request): item is Message {

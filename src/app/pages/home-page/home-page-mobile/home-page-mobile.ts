@@ -28,11 +28,33 @@ export default class HomePageMobile implements OnInit {
   chats: WritableSignal<Chat[]> = signal<Chat[]>([]);
   boardItems: WritableSignal<(Message | Request)[]> = signal<(Message | Request)[]>([]);
 
-  items: MenuItem[] = this.homePageService.items;
+  items: MenuItem[] = [];
 
   async ngOnInit(): Promise<void> {
     await this.homePageService.loadHome();
     this.chats.set(this.homePageService.chats);
+    this.boardItems.set(this.homePageService.boardItems);
+
+    this.homePageService.setMenuCommands({
+      onLoadHome: this.loadHome.bind(this),
+      onLoadMessages: this.loadMessages.bind(this),
+      onLoadRequests: this.loadRequests.bind(this),
+    });
+    this.items = this.homePageService.items;
+  }
+
+  async loadHome(): Promise<void> {
+    await this.homePageService.loadHome();
+    this.boardItems.set(this.homePageService.boardItems);
+  }
+
+  async loadMessages(): Promise<void> {
+    await this.homePageService.loadMessages();
+    this.boardItems.set(this.homePageService.boardItems);
+  }
+
+  async loadRequests(): Promise<void> {
+    await this.homePageService.loadRequests();
     this.boardItems.set(this.homePageService.boardItems);
   }
 

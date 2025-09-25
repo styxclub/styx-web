@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import Chat from '@model/chat.model';
 import Message from '@model/message.model';
 import Request from '@model/request.model';
@@ -17,6 +24,7 @@ import { Tooltip } from 'primeng/tooltip';
   imports: [UserPhoto, UserMessage, MessageItem, RequestItem, ButtonModule, Tooltip, MenuModule],
   templateUrl: './home-page-desktop.html',
   styleUrl: './home-page-desktop.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class HomePageDesktop implements OnInit {
   private homePageService: HomePageService = inject(HomePageService);
@@ -28,11 +36,33 @@ export default class HomePageDesktop implements OnInit {
   chats: WritableSignal<Chat[]> = signal<Chat[]>([]);
   boardItems: WritableSignal<(Message | Request)[]> = signal<(Message | Request)[]>([]);
 
-  items: MenuItem[] = this.homePageService.items;
+  items: MenuItem[] = [];
 
   async ngOnInit(): Promise<void> {
     await this.homePageService.loadHome();
     this.chats.set(this.homePageService.chats);
+    this.boardItems.set(this.homePageService.boardItems);
+
+    this.homePageService.setMenuCommands({
+      onLoadHome: this.loadHome.bind(this),
+      onLoadMessages: this.loadMessages.bind(this),
+      onLoadRequests: this.loadRequests.bind(this),
+    });
+    this.items = this.homePageService.items;
+  }
+
+  async loadHome(): Promise<void> {
+    await this.homePageService.loadHome();
+    this.boardItems.set(this.homePageService.boardItems);
+  }
+
+  async loadMessages(): Promise<void> {
+    await this.homePageService.loadMessages();
+    this.boardItems.set(this.homePageService.boardItems);
+  }
+
+  async loadRequests(): Promise<void> {
+    await this.homePageService.loadRequests();
     this.boardItems.set(this.homePageService.boardItems);
   }
 

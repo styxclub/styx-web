@@ -69,3 +69,19 @@ export interface BoardResponse {
   limit: number;
   nextPage: number | null;
 }
+
+export interface MessagesResponse {
+  status: string;
+  messages: BoardItem[];
+  page: number;
+  limit: number;
+  nextPage: number | null;
+}
+
+export interface RequestsResponse {
+  status: string;
+  requests: BoardItem[];
+  page: number;
+  limit: number;
+  nextPage: number | null;
+}
