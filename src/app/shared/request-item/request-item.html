@@ -19,8 +19,9 @@
             {{request().date}}
         </div>
     </div>
-    <a [routerLink]="['/styx/chat', idUser, request().id]"
-       class="request-item-title">{{request().title}}</a>
+    <a href="#"
+       class="request-item-title"
+       (click)="openRequest($event)">{{request().title}}</a>
     <div class="request-item-body">{{request().body}}</div>
     <div class="request-item-footer">
         <div class="request-item-info">
@@ -59,6 +60,7 @@
                  (click)="showEnrolled(request().enrolled)">
                 Apuntados: {{ request().participantsTotal }} <span class="spacer">-</span> Aceptados: {{ request().participantsAccepted }}
             </div>
+            @if (request().status === 0) {
             <div class="request-item-action">
                 @if (request().isEnrolled) {
                 <p-button label="Desapúntate"
@@ -69,6 +71,7 @@
                           severity="success" />
                 }
             </div>
+            }
         </div>
     </div>
 </div>
