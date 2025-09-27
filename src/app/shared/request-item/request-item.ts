@@ -68,6 +68,7 @@ export default class RequestItem implements OnInit, OnDestroy {
         modal: true,
         closable: true,
         focusOnShow: false,
+        data: { request: this.request() },
       });
     }
   }
