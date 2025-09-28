@@ -37,6 +37,17 @@
     }
 }
 
-.request-detail-close {
+.request-detail-footer {
     margin-top: var(--space-sm);
+}
+
+.request-detail-date-header {
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.request-detail-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

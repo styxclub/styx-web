@@ -18,6 +18,7 @@ import provideCore from '@app/core';
 import AuthStore from '@auth/auth-store';
 import AuthInterceptor from '@interceptors/auth-interceptor';
 import Aura from '@primeuix/themes/aura';
+import { es } from 'primelocale/es.json';
 import { providePrimeNG } from 'primeng/config';
 
 const appConfig: ApplicationConfig = {
@@ -34,6 +35,7 @@ const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([AuthInterceptor])),
     provideAnimations(),
     providePrimeNG({
+      translation: es,
       theme: {
         preset: Aura,
         options: {

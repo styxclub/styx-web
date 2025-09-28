@@ -1,3 +1,4 @@
+@if (step() === 0) {
 <div class="request-detail">
     @for (enrollment of (enrolled() || []); track enrollment.idUser){
     <div class="request-detail-user">
@@ -19,8 +20,25 @@
     }
 </div>
 
-<div class="request-detail-close">
+<div class="request-detail-footer">
     <p-button styleClass="w-full"
               label="Evento celebrado"
+              severity="success"
+              (onClick)="goToClose()" />
+</div>
+}
+
+@if (step() === 1) {
+<div class="request-detail-date-header">
+    Indica la fecha en la que se realizó el evento
+</div>
+<div class="request-detail-date">
+    <p-datepicker [(ngModel)]="closeDate"
+                  [inline]="true" />
+</div>
+<div class="request-detail-footer">
+    <p-button styleClass="w-full"
+              label="Finalizar"
               severity="success" />
 </div>
+}
