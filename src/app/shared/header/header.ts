@@ -12,9 +12,9 @@ import { TooltipModule } from 'primeng/tooltip';
   styleUrl: './header.scss',
 })
 export default class Header {
-  private authService: AuthService = inject(AuthService);
-  private authStore: AuthStore = inject(AuthStore);
-  private router: Router = inject(Router);
+  private readonly authService: AuthService = inject(AuthService);
+  private readonly authStore: AuthStore = inject(AuthStore);
+  private readonly router: Router = inject(Router);
 
   credits: WritableSignal<number | undefined> = signal<number | undefined>(
     this.authStore.user()?.credits

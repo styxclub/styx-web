@@ -27,10 +27,10 @@ import { MessageModule } from 'primeng/message';
   styleUrl: './login-page.scss',
 })
 export default class LoginPage {
-  private fb: FormBuilder = inject(FormBuilder);
-  private auth: AuthService = inject(AuthService);
-  private authStore: AuthStore = inject(AuthStore);
-  private router: Router = inject(Router);
+  private readonly fb: FormBuilder = inject(FormBuilder);
+  private readonly auth: AuthService = inject(AuthService);
+  private readonly authStore: AuthStore = inject(AuthStore);
+  private readonly router: Router = inject(Router);
 
   form = this.fb.group({
     username: this.fb.control<string>('', {

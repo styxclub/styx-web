@@ -17,13 +17,11 @@ import ClassMapperService from '@services/class-mapper-service';
 import { MenuItem } from 'primeng/api';
 import { firstValueFrom } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export default class HomePageService {
-  private http: HttpClient = inject(HttpClient);
-  private authStore: AuthStore = inject(AuthStore);
-  private classMapperService: ClassMapperService = inject(ClassMapperService);
+  private readonly http: HttpClient = inject(HttpClient);
+  private readonly authStore: AuthStore = inject(AuthStore);
+  private readonly classMapperService: ClassMapperService = inject(ClassMapperService);
   private readonly apiUrl: string = environment.apiUrl;
 
   _username: WritableSignal<string | undefined> = signal<string | undefined>(

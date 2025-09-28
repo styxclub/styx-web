@@ -19,7 +19,7 @@ import { TabsModule } from 'primeng/tabs';
   styleUrl: './home-page-mobile.scss',
 })
 export default class HomePageMobile implements OnInit {
-  private homePageService: HomePageService = inject(HomePageService);
+  private readonly homePageService: HomePageService = inject(HomePageService);
 
   username: string | undefined = this.homePageService.username;
   reputation: number | undefined = this.homePageService.reputation;

@@ -29,9 +29,9 @@ import { TooltipModule } from 'primeng/tooltip';
   styleUrl: './request-item.scss',
 })
 export default class RequestItem implements OnInit, OnDestroy {
-  dialogService: DialogService = inject(DialogService);
-  authStore: AuthStore = inject(AuthStore);
-  router: Router = inject(Router);
+  private readonly dialogService: DialogService = inject(DialogService);
+  private readonly authStore: AuthStore = inject(AuthStore);
+  private readonly router: Router = inject(Router);
 
   request: InputSignal<Request> = input.required<Request>();
   isMobile: InputSignal<boolean> = input.required<boolean>();
@@ -64,7 +64,7 @@ export default class RequestItem implements OnInit, OnDestroy {
     ) {
       this.refDetail = this.dialogService.open(RequestDetail, {
         header: this.request().title ?? '',
-        width: '75vw',
+        width: this.isMobile() ? '95vw' : '75vw',
         modal: true,
         closable: true,
         focusOnShow: false,

@@ -18,7 +18,8 @@ import { PhotoSize } from '@interfaces/interfaces';
   styleUrl: './user-photo.scss',
 })
 export default class UserPhoto implements OnInit {
-  private http: HttpClient = inject(HttpClient);
+  private readonly http: HttpClient = inject(HttpClient);
+
   id: InputSignal<number> = input.required<number>();
   size: InputSignal<PhotoSize> = input<PhotoSize>('sm');
 

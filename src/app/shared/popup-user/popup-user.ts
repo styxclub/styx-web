@@ -13,10 +13,10 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
   styleUrl: './popup-user.scss',
 })
 export default class PopupUser {
-  authService: AuthService = inject(AuthService);
-  classMapperService: ClassMapperService = inject(ClassMapperService);
-  userCacheService: UserCacheService = inject(UserCacheService);
-  config: DynamicDialogConfig = inject(DynamicDialogConfig);
+  private readonly authService: AuthService = inject(AuthService);
+  private readonly classMapperService: ClassMapperService = inject(ClassMapperService);
+  private readonly userCacheService: UserCacheService = inject(UserCacheService);
+  private readonly config: DynamicDialogConfig = inject(DynamicDialogConfig);
 
   id: InputSignal<number | null> = input<number | null>(null);
   user: WritableSignal<User | null> = signal<User | null>(null);

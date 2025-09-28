@@ -27,7 +27,7 @@ import { Tooltip } from 'primeng/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class HomePageDesktop implements OnInit {
-  private homePageService: HomePageService = inject(HomePageService);
+  private readonly homePageService: HomePageService = inject(HomePageService);
 
   username: string | undefined = this.homePageService.username;
   reputation: number | undefined = this.homePageService.reputation;

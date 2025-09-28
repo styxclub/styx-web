@@ -18,7 +18,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
   styleUrl: './popup-enrolled.scss',
 })
 export default class PopupEnrolled implements OnInit {
-  config: DynamicDialogConfig = inject(DynamicDialogConfig);
+  private readonly config: DynamicDialogConfig = inject(DynamicDialogConfig);
 
   enrolled: ModelSignal<RequestEnrolled[] | null> = model<RequestEnrolled[] | null>(null);
   isMobile: WritableSignal<boolean> = signal<boolean>(false);

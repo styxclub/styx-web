@@ -42,3 +42,7 @@ export interface PositionInterface {
   x: number;
   y: number;
 }
+
+export interface StatusResponse {
+  status: string;
+}

@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export default class AuthService {
-  private http: HttpClient = inject(HttpClient);
+  private readonly http: HttpClient = inject(HttpClient);
   private readonly apiUrl: string = environment.apiUrl;
 
   async login(payload: LoginPayload): Promise<LoginResponse> {

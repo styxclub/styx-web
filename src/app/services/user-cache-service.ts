@@ -5,7 +5,7 @@ import User from '@model/user.model';
   providedIn: 'root',
 })
 export default class UserCacheService {
-  private cache: Record<number, User> = {};
+  private readonly cache: Record<number, User> = {};
 
   getUser(userId: number): User | undefined {
     return this.cache[userId];
