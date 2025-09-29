@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import AuthGuard from '@guard/auth-guard';
 import ChatPageService from '@pages/chat-page/chat-page-service';
-import EventsPageService from '@pages/events-page/events-page-service';
 import HomePageService from '@pages/home-page/home-page-service';
 import ProfilePageService from '@pages/profile-page/profile-page-service';
 import { isDesktopMatch, isHandsetMatch } from '@shared/matchers';
@@ -33,19 +32,10 @@ const routes: Routes = [
       },
       {
         path: 'events',
-        canMatch: [isDesktopMatch],
-        providers: [EventsPageService],
         loadComponent: () =>
-          import('@pages/events-page/events-page-desktop/events-page-desktop').then(
+          import('@pages/events-page/events-page').then(
             (m) => m.default
           ),
-      },
-      {
-        path: 'events',
-        canMatch: [isHandsetMatch],
-        providers: [EventsPageService],
-        loadComponent: () =>
-          import('@pages/events-page/events-page-mobile/events-page-mobile').then((m) => m.default),
       },
       {
         path: 'chat',
