@@ -1,1 +1,79 @@
-<p>event-new-page works!</p>
+<form [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      autocomplete="off">
+    <div class="event-new">
+        <div class="event-new-header">
+            <div class="event-new-title">
+                <p-floatlabel>
+                    <input pInputText
+                           type="text"
+                           id="title"
+                           formControlName="title"
+                           [invalid]="isInvalid('title')"
+                           class="w-full" />
+                    <label for="title">Título</label>
+                </p-floatlabel>
+                @if (isInvalid('title')) {
+                <p-message severity="error"
+                           size="small"
+                           variant="simple">El título es obligatorio.</p-message>
+                }
+            </div>
+            <div class="event-new-credits">
+                <i class="pi pi-dollar"></i>
+                {{ credits() }}
+            </div>
+        </div>
+        <div class="event-new-body">
+            <p-floatlabel>
+                <textarea pInputTextarea
+                          id="body"
+                          formControlName="body"
+                          [invalid]="isInvalid('body')"
+                          class="w-full h-full"
+                          rows="5"
+                          cols="30"
+                          autoResize></textarea>
+                <label for="body">Descripción</label>
+            </p-floatlabel>
+            @if (isInvalid('body')) {
+            <p-message severity="error"
+                       size="small"
+                       variant="simple">La descripción es obligatoria.</p-message>
+            }
+        </div>
+        <div class="event-add-parameter">
+            <p-button pRipple
+                      label="Añadir parámetro"
+                      icon="pi pi-plus"
+                      severity="success"
+                      (onClick)="addParameter()" />
+        </div>
+        <div class="event-parameters">
+            @for (parameter of parameters(); track parameter.id; let i = $index) {
+            <app-parameter-add [parameter]="parameter"
+                               [ind]="i"
+                               (textChanged)="updateParameterText(i, $event)"
+                               (numChanged)="updateParameterNum(i, $event)"
+                               (dateChanged)="updateParameterDate(i, $event)"
+                               (checkedChanged)="updateParameterChecked(i, $event)"
+                               (removed)="removeParameter($event)" />
+            }
+        </div>
+        <div class="event-new-actions">
+            <a routerLink="/styx/events">
+                <p-button pRipple
+                          label="Cancelar"
+                          icon="pi pi-times"
+                          severity="danger" />
+            </a>
+            <p-button pRipple
+                      label="Crear evento"
+                      icon="pi pi-check"
+                      type="submit"
+                      [disabled]="form.invalid || submitting()"
+                      [loading]="submitting()"
+                      severity="success" />
+        </div>
+    </div>
+</form>

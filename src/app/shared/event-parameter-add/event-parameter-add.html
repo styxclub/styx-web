@@ -1,1 +1,18 @@
-<p>event-parameter-add works!</p>
+@for (parameter of parameters(); track parameter.id) {
+<div class="parameter">
+    <div class="parameter-title">
+        <a href="#"
+           (click)="selectParameter($event, parameter)">{{ parameter.title }}</a>
+        <p-button [icon]="parameter.show ? 'pi pi-angle-up' : 'pi pi-angle-down'"
+                  [rounded]="true"
+                  [text]="true"
+                  severity="success"
+                  (onClick)="show(parameter)" />
+
+    </div>
+    <div class="parameter-body"
+         [class.hidden]="!parameter.show">
+        {{ parameter.body }}
+    </div>
+</div>
+}

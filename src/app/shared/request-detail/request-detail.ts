@@ -26,7 +26,7 @@ import { RippleModule } from 'primeng/ripple';
   styleUrl: './request-detail.scss',
 })
 export default class RequestDetail implements OnInit {
-  private ref: DynamicDialogRef = inject(DynamicDialogRef);
+  private readonly ref: DynamicDialogRef = inject(DynamicDialogRef);
   private readonly config: DynamicDialogConfig = inject(DynamicDialogConfig);
   private readonly requestService: RequestService = inject(RequestService);
   private readonly classMapperService: ClassMapperService = inject(ClassMapperService);

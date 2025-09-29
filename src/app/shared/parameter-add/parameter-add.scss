@@ -1,0 +1,48 @@
+.parameter-add {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--space-sm);
+    margin-right: var(--space-sm);
+    display: flex;
+    align-items: center;
+    height: 61px;
+    box-sizing: border-box;
+
+    .parameter-add-name {
+        margin-right: var(--space-sm);
+    }
+
+    .parameter-add-text {
+        width: 120px;
+        margin-right: var(--space-sm);
+    }
+
+    .parameter-add-number {
+        width: 60px;
+        margin-right: var(--space-sm);
+    }
+
+    .parameter-add-date {
+        width: 170px;
+        margin-right: var(--space-sm);
+
+        .date-box {
+            width: 170px;
+        }
+    }
+
+    .parameter-add-check {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .parameter-add-cost {
+        margin-right: var(--space-sm);
+    }
+
+    .parameter-add-remove {
+        text-decoration: none;
+        color: var(--color-green);
+    }
+}

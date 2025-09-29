@@ -1,0 +1,52 @@
+<div class="parameter-add">
+    <div class="parameter-add-name">{{ parameter().title }}</div>
+    @switch (parameter().type) {
+    @case (0) {
+    <div class="parameter-add-text">
+        <input pInputText
+               type="text"
+               id="text"
+               [(ngModel)]="parameter().text"
+               (ngModelChange)="onTextChange($event)"
+               class="w-full" />
+    </div>
+    }
+    @case (1) {
+    <div class="parameter-add-number">
+        <input pInputText
+               type="number"
+               id="num"
+               [(ngModel)]="parameter().num"
+               (ngModelChange)="onNumChange($event)"
+               class="w-full" />
+    </div>
+    }
+    @case (2) {
+    <div class="parameter-add-date">
+        <p-fluid>
+            <p-datepicker [(ngModel)]="parameter().date"
+                          (ngModelChange)="onDateChange($event)"
+                          [iconDisplay]="'input'"
+                          [showIcon]="true"
+                          class="date-box"
+                          inputId="icondisplay" />
+        </p-fluid>
+    </div>
+    }
+    @case (3) {
+    <div class="parameter-add-check">
+        <p-checkbox [(ngModel)]="parameter().checked"
+                    (ngModelChange)="onCheckedChange($event)"
+                    [binary]="true" />
+    </div>
+    }
+    }
+    <div class="parameter-add-cost">
+        <i class="pi pi-dollar"></i> {{ parameter().cost }}
+    </div>
+    <a href="#"
+       class="parameter-add-remove"
+       (click)="removeParameter($event)">
+        <i class="pi pi-times"></i>
+    </a>
+</div>

@@ -15,9 +15,9 @@ import {
 } from '@angular/router';
 import routes from '@app/app.routes';
 import provideCore from '@app/core';
+import styxPreset from '@app/styx-preset';
 import AuthStore from '@auth/auth-store';
 import AuthInterceptor from '@interceptors/auth-interceptor';
-import Aura from '@primeuix/themes/aura';
 import { es } from 'primelocale/es.json';
 import { providePrimeNG } from 'primeng/config';
 
@@ -38,7 +38,7 @@ const appConfig: ApplicationConfig = {
       translation: es,
       ripple: true,
       theme: {
-        preset: Aura,
+        preset: styxPreset,
         options: {
           darkModeSelector: '.styx-app-dark',
         },

@@ -58,6 +58,8 @@
                               label="Continuar"
                               class="w-full"
                               styleClass="w-full"
+                              [disabled]="form.invalid || submitting()"
+                              [loading]="submitting()"
                               type="submit" />
                 </div>
             </ng-template>

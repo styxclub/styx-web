@@ -1,0 +1,10 @@
+.events-header {
+    display: flex;
+    margin-bottom: var(--space-sm);
+    padding: var(--space-sm);
+
+    .events-title {
+        flex: 1;
+        font-size: var(--font-xl);
+    }
+}
