@@ -10,11 +10,21 @@ import UserPhoto from '@shared/user-photo/user-photo';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { RippleModule } from 'primeng/ripple';
 import { TabsModule } from 'primeng/tabs';
 
 @Component({
   selector: 'app-home-page-mobile',
-  imports: [TabsModule, UserPhoto, UserMessage, MessageItem, RequestItem, ButtonModule, MenuModule],
+  imports: [
+    TabsModule,
+    UserPhoto,
+    UserMessage,
+    MessageItem,
+    RequestItem,
+    ButtonModule,
+    RippleModule,
+    MenuModule,
+  ],
   templateUrl: './home-page-mobile.html',
   styleUrl: './home-page-mobile.scss',
 })

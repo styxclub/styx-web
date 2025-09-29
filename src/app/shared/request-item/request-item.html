@@ -63,11 +63,13 @@
             @if (request().status === 0) {
             <div class="request-item-action">
                 @if (request().isEnrolled) {
-                <p-button label="Desapúntate"
+                <p-button pRipple
+                          label="Desapúntate"
                           severity="danger" />
                 }
                 @else {
-                <p-button label="Apúntate!"
+                <p-button pRipple
+                          label="Apúntate!"
                           severity="success" />
                 }
             </div>

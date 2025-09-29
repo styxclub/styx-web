@@ -10,12 +10,14 @@ import { CardModule } from 'primeng/card';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
+import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-login-page',
   imports: [
     CardModule,
     ButtonModule,
+    RippleModule,
     InputTextModule,
     MessageModule,
     FloatLabel,

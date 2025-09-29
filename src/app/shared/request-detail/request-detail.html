@@ -21,7 +21,8 @@
 </div>
 
 <div class="request-detail-footer">
-    <p-button styleClass="w-full"
+    <p-button pRipple
+              styleClass="w-full"
               label="Evento celebrado"
               severity="success"
               (onClick)="goToClose()" />
@@ -37,7 +38,8 @@
                   [inline]="true" />
 </div>
 <div class="request-detail-footer">
-    <p-button styleClass="w-full"
+    <p-button pRipple
+              styleClass="w-full"
               label="Finalizar"
               severity="success"
               (onClick)="closeRequest()" />
@@ -64,7 +66,8 @@
 </div>
 }
 <div class="request-detail-footer">
-    <p-button styleClass="w-full"
+    <p-button pRipple
+              styleClass="w-full"
               label="Votar"
               severity="success"
               (onClick)="vote()"

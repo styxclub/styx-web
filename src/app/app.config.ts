@@ -36,6 +36,7 @@ const appConfig: ApplicationConfig = {
     provideAnimations(),
     providePrimeNG({
       translation: es,
+      ripple: true,
       theme: {
         preset: Aura,
         options: {

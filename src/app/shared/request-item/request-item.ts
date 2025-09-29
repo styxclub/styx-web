@@ -14,6 +14,7 @@ import UserPhoto from '@shared/user-photo/user-photo';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 
@@ -25,6 +26,7 @@ import { TooltipModule } from 'primeng/tooltip';
     PopupEnrolledDirective,
     PopupUserDirective,
     ButtonModule,
+    RippleModule,
     TooltipModule,
     ToastModule,
   ],

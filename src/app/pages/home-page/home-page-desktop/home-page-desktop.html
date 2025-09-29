@@ -21,7 +21,8 @@
                 @else {
                 {{ bio }}
                 }
-                <p-button icon="pi pi-pencil"
+                <p-button pRipple
+                          icon="pi pi-pencil"
                           [rounded]="true"
                           [text]="true"
                           severity="success"
@@ -42,7 +43,8 @@
             <p-menu #menu
                     [model]="items"
                     [popup]="true" />
-            <p-button (click)="menu.toggle($event)"
+            <p-button pRipple
+                      (click)="menu.toggle($event)"
                       icon="pi pi-ellipsis-v" />
         </div>
         @for (item of boardItems(); track item.id + item.kind) {

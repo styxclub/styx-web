@@ -17,10 +17,11 @@ import UserPhoto from '@shared/user-photo/user-photo';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-request-detail',
-  imports: [UserPhoto, ButtonModule, DatePickerModule, FormsModule],
+  imports: [UserPhoto, ButtonModule, RippleModule, DatePickerModule, FormsModule],
   templateUrl: './request-detail.html',
   styleUrl: './request-detail.scss',
 })

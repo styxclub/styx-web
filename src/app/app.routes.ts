@@ -32,10 +32,11 @@ const routes: Routes = [
       },
       {
         path: 'events',
-        loadComponent: () =>
-          import('@pages/events-page/events-page').then(
-            (m) => m.default
-          ),
+        loadComponent: () => import('@pages/events-page/events-page').then((m) => m.default),
+      },
+      {
+        path: 'event-new',
+        loadComponent: () => import('@pages/event-new-page/event-new-page').then((m) => m.default),
       },
       {
         path: 'chat',

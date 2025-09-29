@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import AuthStore from '@auth/auth-store';
 import AuthService from '@services/auth-service';
 import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-header',
-  imports: [ButtonModule, TooltipModule],
+  imports: [ButtonModule, RippleModule, TooltipModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })

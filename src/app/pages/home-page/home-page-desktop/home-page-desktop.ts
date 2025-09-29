@@ -17,11 +17,21 @@ import UserPhoto from '@shared/user-photo/user-photo';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { RippleModule } from 'primeng/ripple';
 import { Tooltip } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-home-page-desktop',
-  imports: [UserPhoto, UserMessage, MessageItem, RequestItem, ButtonModule, Tooltip, MenuModule],
+  imports: [
+    UserPhoto,
+    UserMessage,
+    MessageItem,
+    RequestItem,
+    ButtonModule,
+    RippleModule,
+    Tooltip,
+    MenuModule,
+  ],
   templateUrl: './home-page-desktop.html',
   styleUrl: './home-page-desktop.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

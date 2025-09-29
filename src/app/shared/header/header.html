@@ -6,7 +6,8 @@
             <i class="pi pi-dollar"></i>
             {{authStore.credits()}}
         </div>
-        <p-button icon="pi pi-power-off"
+        <p-button pRipple
+                  icon="pi pi-power-off"
                   pTooltip="Cerrar sesión"
                   (onClick)="logout()" />
     </div>
