@@ -1,4 +1,4 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import AuthStore from '@auth/auth-store';
 import AuthService from '@services/auth-service';
@@ -13,12 +13,8 @@ import { TooltipModule } from 'primeng/tooltip';
 })
 export default class Header {
   private readonly authService: AuthService = inject(AuthService);
-  private readonly authStore: AuthStore = inject(AuthStore);
+  public readonly authStore: AuthStore = inject(AuthStore);
   private readonly router: Router = inject(Router);
-
-  credits: WritableSignal<number | undefined> = signal<number | undefined>(
-    this.authStore.user()?.credits
-  );
 
   logout(): void {
     const refreshToken: string | null = this.authStore.refreshToken();

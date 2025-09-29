@@ -1,13 +1,14 @@
-import { IntoInterface } from '@app/interfaces/models/into.interfaces';
+import { IntoInterface } from '@interfaces/models/into.interfaces';
 import { UserInterface } from '@interfaces/models/user.interfaces';
-import { urldecode } from '@osumi/tools';
-import Into from './into.model';
+import Into from '@model/into.model';
+import { urldecode, urlencode } from '@osumi/tools';
 
 export default class User {
   constructor(
     public id: number | null = null,
     public username: string | null = null,
     public bio: string | null = null,
+    public credits: number | null = null,
     public reputation: number | null = null,
     public votes: number | null = null,
     public intos: Into[] = []
@@ -24,5 +25,17 @@ export default class User {
         ? ui.intos.map((i: IntoInterface): Into => new Into().fromInterface(i))
         : [];
     return this;
+  }
+
+  toInterface(encode: boolean = false): UserInterface {
+    return {
+      id: this.id,
+      username: encode ? urlencode(this.username) : this.username,
+      bio: encode ? urlencode(this.bio) : this.bio,
+      credits: this.credits,
+      reputation: this.reputation,
+      votes: this.votes,
+      intos: this.intos.map((i: Into): IntoInterface => i.toInterface()),
+    };
   }
 }

@@ -1,8 +1,17 @@
-import { Injectable, WritableSignal, computed, effect, inject, signal } from '@angular/core';
-import ClassMapperService from '@app/services/class-mapper-service';
+import {
+  Injectable,
+  Signal,
+  WritableSignal,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
+import { UserInterface } from '@app/interfaces/models/user.interfaces';
 import { LoginResponse, SessionData, UserSummary } from '@interfaces/interfaces';
 import { ParameterInterface } from '@interfaces/models/parameter.interfaces';
 import Parameter from '@model/parameter.model';
+import ClassMapperService from '@services/class-mapper-service';
 
 const LS_KEY = 'styx.session.v1';
 
@@ -11,6 +20,7 @@ export default class AuthStore {
   private classMapperService: ClassMapperService = inject(ClassMapperService);
 
   private _user: WritableSignal<UserSummary | null> = signal<UserSummary | null>(null);
+  credits: Signal<number> = computed((): number => this._user()?.credits ?? 0);
   private _parameters: WritableSignal<Parameter[]> = signal<Parameter[]>([]);
   private _accessToken = signal<string | null>(null);
   private _accessExpires = signal<number | null>(null); // epoch ms
@@ -79,6 +89,19 @@ export default class AuthStore {
     this._accessExpires.set(null);
     this._refreshToken.set(null);
     localStorage.removeItem(LS_KEY);
+  }
+
+  updateUser(user: UserInterface): void {
+    const current: UserSummary | null = this.user();
+    if (current) {
+      const updatedUser: UserSummary = {
+        ...current,
+        credits: user.credits ?? 0,
+        reputation: user.reputation ?? 0,
+        votes: user.votes ?? 0,
+      };
+      this._user.set(updatedUser);
+    }
   }
 
   user(): UserSummary | null {

@@ -11,8 +11,10 @@ import PopupUser from '@shared/popup-user/popup-user';
 import PopupUserDirective from '@shared/popup-user/popup-user-directive';
 import RequestDetail from '@shared/request-detail/request-detail';
 import UserPhoto from '@shared/user-photo/user-photo';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
@@ -24,6 +26,7 @@ import { TooltipModule } from 'primeng/tooltip';
     PopupUserDirective,
     ButtonModule,
     TooltipModule,
+    ToastModule,
   ],
   templateUrl: './request-item.html',
   styleUrl: './request-item.scss',
@@ -32,6 +35,7 @@ export default class RequestItem implements OnInit, OnDestroy {
   private readonly dialogService: DialogService = inject(DialogService);
   private readonly authStore: AuthStore = inject(AuthStore);
   private readonly router: Router = inject(Router);
+  private readonly messageService: MessageService = inject(MessageService);
 
   request: InputSignal<Request> = input.required<Request>();
   isMobile: InputSignal<boolean> = input.required<boolean>();
@@ -47,20 +51,23 @@ export default class RequestItem implements OnInit, OnDestroy {
 
   openRequest(ev: MouseEvent): void {
     ev.preventDefault();
+    const requestUserId: number | null | undefined = this.request().user?.id;
+    const userId: number | undefined = this.authStore.user()?.id;
+    // Si el evento es nuevo, si está ya finalizado (votado) o si no soy yo el que lo ha creado, mando al chat
     if (
       this.request().status === 0 ||
-      (this.request().status === 1 &&
-        this.request().user !== null &&
-        this.authStore.user() !== null &&
-        this.request().user?.id !== this.authStore.user()?.id)
+      this.request().status === 3 ||
+      (this.request().status === 1 && requestUserId !== userId)
     ) {
       this.router.navigate(['/styx/chat', this.idUser, this.request().id]);
     }
+    // Si el evento está cerrado y es mío o si soy uno de los apuntados, abro el detalle
     if (
-      this.request().status === 1 &&
-      this.request().user !== null &&
-      this.authStore.user() !== null &&
-      this.request().user?.id === this.authStore.user()?.id
+      (this.request().status === 1 && requestUserId === userId) ||
+      (this.request().status === 2 &&
+        this.request().enrolled.findIndex((e: RequestEnrolled): boolean => e.idUser === userId) !==
+          -1) ||
+      requestUserId === userId
     ) {
       this.refDetail = this.dialogService.open(RequestDetail, {
         header: this.request().title ?? '',
@@ -69,6 +76,15 @@ export default class RequestItem implements OnInit, OnDestroy {
         closable: true,
         focusOnShow: false,
         data: { request: this.request() },
+      });
+      this.refDetail.onClose.subscribe((result: any): void => {
+        if (result === true) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Finalizado',
+            detail: '¡Evento finalizado!',
+          });
+        }
       });
     }
   }

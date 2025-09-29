@@ -50,3 +50,30 @@
     justify-content: center;
     align-items: center;
 }
+
+.request-detail-vote {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-sm);
+
+    .vote-user-photo {
+        margin-right: var(--space-sm);
+    }
+
+    .vote-user-info {
+        display: flex;
+        flex-direction: column;
+
+        span {
+            margin-top: var(--space-sm);
+
+            .star-vote {
+                cursor: pointer;
+                color: var(--color-gold);
+                margin-right: var(--space-sm);
+            }
+        }
+    }
+}

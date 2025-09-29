@@ -1,4 +1,4 @@
-import { ChatInterface } from '@app/interfaces/models/chat.interfaces';
+import { ChatInterface } from '@interfaces/models/chat.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
 
 export default class Chat {

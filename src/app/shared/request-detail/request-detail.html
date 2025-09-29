@@ -43,3 +43,31 @@
               (onClick)="closeRequest()" />
 </div>
 }
+
+@if (step() === 2) {
+@for (vote of (votes() || []); track vote.id) {
+<div class="request-detail-vote">
+    <div class="vote-user-photo">
+        <app-user-photo [id]="vote.idUserTo ?? 0" />
+    </div>
+    <div class="vote-user-info">
+        {{ vote.userTo?.username }}
+        <span>
+            @for (i of [1, 2, 3, 4, 5]; track i) {
+            <i class="star-vote pi"
+               [class.pi-star-fill]="i <= (vote.vote ?? 0)"
+               [class.pi-star]="i > (vote.vote ?? 0)"
+               (click)="setVote(vote, i)"></i>
+            }
+        </span>
+    </div>
+</div>
+}
+<div class="request-detail-footer">
+    <p-button styleClass="w-full"
+              label="Votar"
+              severity="success"
+              (onClick)="vote()"
+              [disabled]="!votesFinished()" />
+</div>
+}

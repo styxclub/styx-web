@@ -23,7 +23,7 @@ export default class Request {
 
   fromInterface(rp: RequestPayload): Request {
     this.id = rp.id;
-    this.user = new User(rp.idUser, rp.username, null, rp.reputation, rp.votes);
+    this.user = new User(rp.idUser, rp.username, null, null, rp.reputation, rp.votes);
     this.title = rp.title;
     this.body = rp.body;
     this.reward = rp.reward;

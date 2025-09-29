@@ -2,9 +2,9 @@
     <div class="header-inner">STYX</div>
     <div class="header-options">
         <div class="user-credits"
-             [pTooltip]="`Tienes ${credits()} créditos disponibles`">
+             [pTooltip]="`Tienes ${authStore.credits()} créditos disponibles`">
             <i class="pi pi-dollar"></i>
-            {{credits()}}
+            {{authStore.credits()}}
         </div>
         <p-button icon="pi pi-power-off"
                   pTooltip="Cerrar sesión"
