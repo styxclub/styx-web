@@ -40,10 +40,10 @@ export default class RequestItem implements OnInit, OnDestroy {
   request: InputSignal<Request> = input.required<Request>();
   isMobile: InputSignal<boolean> = input.required<boolean>();
   idUser: number | null | undefined = null;
-  refParameter: DynamicDialogRef | undefined;
-  refEnrolled: DynamicDialogRef | undefined;
-  refUser: DynamicDialogRef | undefined;
-  refDetail: DynamicDialogRef | undefined;
+  refParameter: DynamicDialogRef | null = null;
+  refEnrolled: DynamicDialogRef | null = null;
+  refUser: DynamicDialogRef | null = null;
+  refDetail: DynamicDialogRef | null = null;
 
   ngOnInit(): void {
     this.idUser = this.request().user?.id;
@@ -77,7 +77,7 @@ export default class RequestItem implements OnInit, OnDestroy {
         focusOnShow: false,
         data: { request: this.request() },
       });
-      this.refDetail.onClose.subscribe((result: any): void => {
+      this.refDetail?.onClose.subscribe((result: any): void => {
         if (result === true) {
           this.messageService.add({
             severity: 'success',
