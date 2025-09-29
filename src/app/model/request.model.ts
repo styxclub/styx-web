@@ -2,7 +2,7 @@ import { RequestEnrolled, RequestParameter, RequestPayload } from '@interfaces/h
 import User from '@model/user.model';
 
 export default class Request {
-  kind: string = 'message';
+  kind: string = 'request';
 
   constructor(
     public id: number | null = null,

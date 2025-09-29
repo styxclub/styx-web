@@ -108,13 +108,9 @@ export default class HomePageService {
     }
     const items: (Message | Request)[] = response.board.map((it: BoardItem): Message | Request => {
       if (it.kind === 'message') {
-        const m: Message = new Message().fromInterface(it.payload as MessagePayload);
-        (m as any).kind = 'message';
-        return m;
+        return new Message().fromInterface(it.payload as MessagePayload);
       } else {
-        const r: Request = new Request().fromInterface(it.payload as RequestPayload);
-        (r as any).kind = 'request';
-        return r;
+        return new Request().fromInterface(it.payload as RequestPayload);
       }
     });
     this._boardItems.set(items);

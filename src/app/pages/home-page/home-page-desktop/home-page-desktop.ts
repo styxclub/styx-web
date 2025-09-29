@@ -64,6 +64,7 @@ export default class HomePageDesktop implements OnInit {
   async loadRequests(): Promise<void> {
     await this.homePageService.loadRequests();
     this.boardItems.set(this.homePageService.boardItems);
+    console.log(this.boardItems());
   }
 
   isMessage(item: Message | Request): item is Message {
