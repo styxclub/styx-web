@@ -1,0 +1,13 @@
+<p>{{ message() }}</p>
+<div class="actions">
+    @if (showConfirm()) {
+    <p-button pRipple
+              label="Cancelar"
+              (click)="ref.close(false)"
+              severity="danger" />
+    }
+    <p-button pRipple
+              label="Aceptar"
+              (click)="ref.close(true)"
+              severity="success" />
+</div>

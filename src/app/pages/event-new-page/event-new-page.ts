@@ -9,7 +9,9 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import AuthStore from '@app/auth/auth-store';
 import Parameter from '@model/parameter.model';
+import DialogAlertService from '@services/dialog-alert-service';
 import EventParameterAdd from '@shared/event-parameter-add/event-parameter-add';
 import ParameterAdd from '@shared/parameter-add/parameter-add';
 import { ButtonModule } from 'primeng/button';
@@ -40,6 +42,8 @@ import { TextareaModule } from 'primeng/textarea';
 export default class EventNewPage implements OnDestroy {
   private readonly fb: FormBuilder = inject(FormBuilder);
   private readonly dialogService: DialogService = inject(DialogService);
+  private readonly dialogAlertService: DialogAlertService = inject(DialogAlertService);
+  private readonly authStore: AuthStore = inject(AuthStore);
 
   form = this.fb.group({
     title: this.fb.control<string>('', {
@@ -118,7 +122,13 @@ export default class EventNewPage implements OnDestroy {
     );
   }
 
-  onSubmit(): void {}
+  async onSubmit(): Promise<void> {
+    const result: boolean = await this.dialogAlertService.confirm(
+      'Error',
+      'No tienes suficientes créditos.'
+    );
+    console.log(result);
+  }
 
   ngOnDestroy(): void {
     if (this.refParameter) {

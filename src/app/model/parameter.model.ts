@@ -5,7 +5,7 @@ export default class Parameter {
   show: boolean = false;
   num: number = 1;
   text: string = '';
-  date: Date | null = null;
+  date: Date = new Date();
   checked: boolean = false;
 
   constructor(

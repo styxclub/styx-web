@@ -18,6 +18,8 @@
                id="num"
                [(ngModel)]="parameter().num"
                (ngModelChange)="onNumChange($event)"
+               min="1"
+               step="1"
                class="w-full" />
     </div>
     }
