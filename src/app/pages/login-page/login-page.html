@@ -1,6 +1,5 @@
 <div class="login-form">
-    <form [formGroup]="form"
-          (ngSubmit)="onSubmit()"
+    <form (ngSubmit)="onSubmit()"
           autocomplete="off">
         <p-card>
             <ng-template #header>
@@ -18,15 +17,14 @@
                     <p-floatlabel>
                         <input pInputText
                                type="text"
+                               [field]="loginForm.username"
                                id="username"
-                               formControlName="username"
-                               [invalid]="isInvalid('username')"
                                class="w-full"
                                autocomplete="off"
                                autocapitalize="none" />
                         <label for="username">Usuario</label>
                     </p-floatlabel>
-                    @if (isInvalid('username')) {
+                    @if (loginForm.username().touched() && loginForm.username().errors().length > 0) {
                     <p-message severity="error"
                                size="small"
                                variant="simple">El nombre de usuario es obligatorio.</p-message>
@@ -36,19 +34,16 @@
                     <p-floatlabel>
                         <input pInputText
                                type="password"
+                               [field]="loginForm.password"
                                id="password"
-                               formControlName="password"
-                               [invalid]="isInvalid('password')"
                                class="w-full"
                                autocomplete="off" />
                         <label for="password">Contraseña</label>
                     </p-floatlabel>
-                    @if (isInvalid('password')) {
-                    @if (form.get('password')?.errors?.['required']) {
+                    @if (loginForm.password().touched() &&loginForm.password().errors().length > 0) {
                     <p-message severity="error"
                                size="small"
                                variant="simple">La contraseña es obligatoria.</p-message>
-                    }
                     }
                 </div>
             </div>
@@ -58,7 +53,7 @@
                               label="Continuar"
                               class="w-full"
                               styleClass="w-full"
-                              [disabled]="form.invalid || submitting()"
+                              [disabled]="!isValid() || submitting()"
                               [loading]="submitting()"
                               type="submit" />
                 </div>

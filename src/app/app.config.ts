@@ -6,7 +6,6 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
   withComponentInputBinding,
@@ -33,7 +32,6 @@ const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
     ),
     provideHttpClient(withInterceptors([AuthInterceptor])),
-    provideAnimations(),
     providePrimeNG({
       translation: es,
       ripple: true,

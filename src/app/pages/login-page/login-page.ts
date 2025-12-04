@@ -1,9 +1,10 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, inject, signal, WritableSignal } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, computed, inject, Signal, signal, WritableSignal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { disabled, Field, form, required } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import AuthStore from '@auth/auth-store';
-import { LoginResponse } from '@interfaces/interfaces';
+import { LoginData, LoginResponse } from '@interfaces/interfaces';
 import AuthService from '@services/auth-service';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -22,56 +23,49 @@ import { RippleModule } from 'primeng/ripple';
     MessageModule,
     FloatLabel,
     FormsModule,
-    ReactiveFormsModule,
     NgOptimizedImage,
+    Field,
   ],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })
 export default class LoginPage {
-  private readonly fb: FormBuilder = inject(FormBuilder);
   private readonly auth: AuthService = inject(AuthService);
   private readonly authStore: AuthStore = inject(AuthStore);
   private readonly router: Router = inject(Router);
 
-  form = this.fb.group({
-    username: this.fb.control<string>('', {
-      validators: [Validators.required],
-    }),
-    password: this.fb.control<string>('', {
-      validators: [Validators.required],
-    }),
+  loginModel: WritableSignal<LoginData> = signal<LoginData>({
+    username: '',
+    password: '',
   });
+  loginForm = form(this.loginModel, (schemaPath) => {
+    required(schemaPath.username);
+    required(schemaPath.password);
+    disabled(schemaPath.username, (): boolean => this.submitting());
+    disabled(schemaPath.password, (): boolean => this.submitting());
+  });
+  isValid: Signal<boolean> = computed(
+    (): boolean =>
+      this.loginForm.username().errors().length === 0 &&
+      this.loginForm.password().errors().length === 0
+  );
   hidePassword: WritableSignal<boolean> = signal(true);
   submitting: WritableSignal<boolean> = signal(false);
   serverError: WritableSignal<string | null> = signal<string | null>(null);
-
-  username = () => this.form.get('username');
-  password = () => this.form.get('password');
 
   toggleHidePassword(): void {
     this.hidePassword.update((v: boolean): boolean => !v);
   }
 
-  isInvalid(controlName: string) {
-    const control = this.form.get(controlName);
-    return control?.invalid && (control.touched || this.submitting());
-  }
-
   async onSubmit(): Promise<void> {
     this.serverError.set(null);
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
+    if (!this.isValid()) {
       return;
     }
     this.submitting.set(true);
     try {
-      const response: LoginResponse = await this.auth.login({
-        username: this.username()!.value!,
-        password: this.password()!.value!,
-      });
+      const response: LoginResponse = await this.auth.login(this.loginModel());
       this.authStore.applyLoginResponse(response);
-      this.form.reset();
       this.router.navigate(['/styx/home']);
     } catch (e: unknown) {
       const msg: string =
