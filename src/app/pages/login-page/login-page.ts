@@ -1,7 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, inject, Signal, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { disabled, Field, form, required } from '@angular/forms/signals';
+import { disabled, form, FormField, required } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import AuthStore from '@auth/auth-store';
 import { LoginData, LoginResponse } from '@interfaces/interfaces';
@@ -24,7 +24,7 @@ import { RippleModule } from 'primeng/ripple';
     FloatLabel,
     FormsModule,
     NgOptimizedImage,
-    Field,
+    FormField,
   ],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
