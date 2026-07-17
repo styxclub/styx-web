@@ -9,8 +9,12 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import AuthStore from '@app/auth/auth-store';
+import ICON_SIZES from '@interfaces/icon-sizes.enum';
 import Parameter from '@model/parameter.model';
+import { Check } from '@primeicons/angular/check';
+import { Dollar } from '@primeicons/angular/dollar';
+import { Plus } from '@primeicons/angular/plus';
+import { Times } from '@primeicons/angular/times';
 import DialogAlertService from '@services/dialog-alert-service';
 import EventParameterAdd from '@shared/event-parameter-add/event-parameter-add';
 import ParameterAdd from '@shared/parameter-add/parameter-add';
@@ -19,7 +23,6 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
-import { RippleModule } from 'primeng/ripple';
 import { TextareaModule } from 'primeng/textarea';
 
 @Component({
@@ -33,8 +36,11 @@ import { TextareaModule } from 'primeng/textarea';
     FormsModule,
     ReactiveFormsModule,
     ButtonModule,
-    RippleModule,
     RouterLink,
+    Dollar,
+    Plus,
+    Times,
+    Check,
   ],
   templateUrl: './event-new-page.html',
   styleUrl: './event-new-page.scss',
@@ -43,7 +49,7 @@ export default class EventNewPage implements OnDestroy {
   private readonly fb: FormBuilder = inject(FormBuilder);
   private readonly dialogService: DialogService = inject(DialogService);
   private readonly dialogAlertService: DialogAlertService = inject(DialogAlertService);
-  private readonly authStore: AuthStore = inject(AuthStore);
+  readonly ICON_SIZES = ICON_SIZES;
 
   form = this.fb.group({
     title: this.fb.control<string>('', {
@@ -89,43 +95,45 @@ export default class EventNewPage implements OnDestroy {
   updateParameterText(index: number, newText: string): void {
     this.parameters.update((params: Parameter[]): Parameter[] =>
       params.map(
-        (p: Parameter, i: number): Parameter => (i === index ? p.cloneWithText(newText) : p)
-      )
+        (p: Parameter, i: number): Parameter => (i === index ? p.cloneWithText(newText) : p),
+      ),
     );
   }
 
   updateParameterNum(index: number, newNum: number): void {
     this.parameters.update((params: Parameter[]): Parameter[] =>
-      params.map((p: Parameter, i: number): Parameter => (i === index ? p.cloneWithNum(newNum) : p))
+      params.map(
+        (p: Parameter, i: number): Parameter => (i === index ? p.cloneWithNum(newNum) : p),
+      ),
     );
   }
 
   updateParameterDate(index: number, newDate: Date): void {
     this.parameters.update((params: Parameter[]): Parameter[] =>
       params.map(
-        (p: Parameter, i: number): Parameter => (i === index ? p.cloneWithDate(newDate) : p)
-      )
+        (p: Parameter, i: number): Parameter => (i === index ? p.cloneWithDate(newDate) : p),
+      ),
     );
   }
 
   updateParameterChecked(index: number, newChecked: boolean): void {
     this.parameters.update((params: Parameter[]): Parameter[] =>
       params.map(
-        (p: Parameter, i: number): Parameter => (i === index ? p.cloneWithChecked(newChecked) : p)
-      )
+        (p: Parameter, i: number): Parameter => (i === index ? p.cloneWithChecked(newChecked) : p),
+      ),
     );
   }
 
   removeParameter(ind: number): void {
     this.parameters.update((params: Parameter[]): Parameter[] =>
-      params.filter((_: Parameter, i: number): boolean => i !== ind)
+      params.filter((_: Parameter, i: number): boolean => i !== ind),
     );
   }
 
   async onSubmit(): Promise<void> {
     const result: boolean = await this.dialogAlertService.confirm(
       'Error',
-      'No tienes suficientes créditos.'
+      'No tienes suficientes créditos.',
     );
     console.log(result);
   }

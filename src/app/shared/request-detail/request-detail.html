@@ -8,12 +8,14 @@
         <div class="user-info">
             {{ enrollment.username }}
             <span>
-                <i class="pi pi-star"></i> {{ enrollment.reputation }} ({{ enrollment.votes }})
+                <svg data-p-icon="star"
+                     [size]="ICON_SIZES.LARGE"></svg> {{ enrollment.reputation }} ({{ enrollment.votes }})
             </span>
         </div>
         @if (enrollment.status === 1) {
         <div class="user-accepted">
-            <i class="pi pi-check-circle"></i>
+            <svg data-p-icon="check-circle"
+                 [size]="ICON_SIZES.LARGE"></svg>
         </div>
         }
     </div>
@@ -21,11 +23,12 @@
 </div>
 
 <div class="request-detail-footer">
-    <p-button pRipple
-              styleClass="w-full"
-              label="Evento celebrado"
-              severity="success"
-              (onClick)="goToClose()" />
+    <button pButton
+            styleClass="w-full"
+            severity="success"
+            (onClick)="goToClose()">
+        Evento celebrado
+    </button>
 </div>
 }
 
@@ -38,11 +41,12 @@
                   [inline]="true" />
 </div>
 <div class="request-detail-footer">
-    <p-button pRipple
-              styleClass="w-full"
-              label="Finalizar"
-              severity="success"
-              (onClick)="closeRequest()" />
+    <button pButton
+            styleClass="w-full"
+            severity="success"
+            (onClick)="closeRequest()">
+        Finalizar
+    </button>
 </div>
 }
 
@@ -66,11 +70,12 @@
 </div>
 }
 <div class="request-detail-footer">
-    <p-button pRipple
-              styleClass="w-full"
-              label="Votar"
-              severity="success"
-              (onClick)="vote()"
-              [disabled]="!votesFinished()" />
+    <button pButton
+            styleClass="w-full"
+            severity="success"
+            (onClick)="vote()"
+            [disabled]="!votesFinished()">
+        Votar
+    </button>
 </div>
 }

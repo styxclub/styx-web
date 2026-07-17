@@ -8,7 +8,10 @@ import {
   OutputEmitterRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import ICON_SIZES from '@interfaces/icon-sizes.enum';
 import Parameter from '@model/parameter.model';
+import { Dollar } from '@primeicons/angular/dollar';
+import { Times } from '@primeicons/angular/times';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DatePickerModule } from 'primeng/datepicker';
 import { FluidModule } from 'primeng/fluid';
@@ -16,11 +19,21 @@ import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-parameter-add',
-  imports: [FormsModule, InputTextModule, DatePickerModule, FluidModule, CheckboxModule],
+  imports: [
+    FormsModule,
+    InputTextModule,
+    DatePickerModule,
+    FluidModule,
+    CheckboxModule,
+    Dollar,
+    Times,
+  ],
   templateUrl: './parameter-add.html',
   styleUrl: './parameter-add.scss',
 })
 export default class ParameterAdd {
+  readonly ICON_SIZES = ICON_SIZES;
+
   parameter: ModelSignal<Parameter> = model.required<Parameter>();
   ind: InputSignal<number> = input.required<number>();
   removed: OutputEmitterRef<number> = output<number>();

@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import {
   ApplicationConfig,
   inject,
@@ -16,6 +16,7 @@ import routes from '@app/app.routes';
 import provideCore from '@app/core';
 import styxPreset from '@app/styx-preset';
 import AuthStore from '@auth/auth-store';
+import license from '@env/license';
 import AuthInterceptor from '@interceptors/auth-interceptor';
 import { es } from 'primelocale/es.json';
 import { providePrimeNG } from 'primeng/config';
@@ -29,9 +30,9 @@ const appConfig: ApplicationConfig = {
       routes,
       withViewTransitions(),
       withComponentInputBinding(),
-      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
     ),
-    provideHttpClient(withInterceptors([AuthInterceptor])),
+    provideHttpClient(withXhr(), withInterceptors([AuthInterceptor])),
     providePrimeNG({
       translation: es,
       ripple: true,
@@ -41,6 +42,7 @@ const appConfig: ApplicationConfig = {
           darkModeSelector: '.styx-app-dark',
         },
       },
+      license: license,
     }),
     provideCore(),
   ],

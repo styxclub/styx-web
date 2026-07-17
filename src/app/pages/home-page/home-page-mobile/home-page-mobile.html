@@ -14,7 +14,8 @@
                     <div class="user-info">
                         <div class="user-name">{{ username }}</div>
                         <div class="user-reputation">
-                            <i class="pi pi-star"></i>
+                            <svg data-p-icon="star"
+                                 [size]="ICON_SIZES.LARGE"></svg>
                             {{ reputation }} ({{ votes }})
                         </div>
                     </div>
@@ -26,13 +27,16 @@
                     @else {
                     {{ bio }}
                     }
-                    <p-button pRipple
-                              icon="pi pi-pencil"
-                              [rounded]="true"
-                              [text]="true"
-                              severity="success"
-                              class="bio-button"
-                              pTooltip="Editar bio" />
+                    <button pButton
+                            iconOnly
+                            [rounded]="true"
+                            [text]="true"
+                            severity="success"
+                            class="bio-button"
+                            pTooltip="Editar bio">
+                        <svg data-p-icon="pencil"
+                             [size]="ICON_SIZES.NORMAL"></svg>
+                    </button>
                 </div>
             </div>
             <div class="chats">
@@ -45,12 +49,39 @@
         <p-tabpanel value="1">
             <div class="board-header">
                 <div class="board-title">Tablón de noticias</div>
-                <p-menu #menu
-                        [model]="items"
-                        [popup]="true" />
-                <p-button pRipple
-                          (click)="menu.toggle($event)"
-                          icon="pi pi-ellipsis-v" />
+                <p-menu [model]="items"
+                        [popup]="true"
+                        #menu>
+                    <ng-template #item
+                                 let-item>
+                        <a class="p-menu-item-link">
+                            @switch (item.iconName) {
+                            @case ('book') {
+                            <svg data-p-icon="book"
+                                 [size]="ICON_SIZES.NORMAL"></svg>
+                            }
+
+                            @case ('sparkles') {
+                            <svg data-p-icon="sparkles"
+                                 [size]="ICON_SIZES.NORMAL"></svg>
+                            }
+
+                            @case ('calendar') {
+                            <svg data-p-icon="calendar"
+                                 [size]="ICON_SIZES.NORMAL"></svg>
+                            }
+                            }
+
+                            <span class="ml-2">{{ item.label }}</span>
+                        </a>
+                    </ng-template>
+                </p-menu>
+                <button pButton
+                        iconOnly
+                        (click)="menu.toggle($event)">
+                    <svg data-p-icon="ellipsis-v"
+                         [size]="ICON_SIZES.NORMAL"></svg>
+                </button>
             </div>
             @for (item of boardItems(); track item.id + item.kind) {
             @if (isMessage(item)) {

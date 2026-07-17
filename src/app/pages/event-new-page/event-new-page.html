@@ -20,7 +20,8 @@
                 }
             </div>
             <div class="event-new-credits">
-                <i class="pi pi-dollar"></i>
+                <svg data-p-icon="dollar"
+                     [size]="ICON_SIZES.LARGE"></svg>
                 {{ credits() }}
             </div>
         </div>
@@ -43,11 +44,14 @@
             }
         </div>
         <div class="event-add-parameter">
-            <p-button pRipple
-                      label="Añadir parámetro"
-                      icon="pi pi-plus"
-                      severity="success"
-                      (onClick)="addParameter()" />
+            <button pButton
+                    label="Añadir parámetro"
+                    severity="success"
+                    (onClick)="addParameter()">
+                <svg data-p-icon="plus"
+                     [size]="ICON_SIZES.NORMAL"></svg>
+                Añadir parámetro
+            </button>
         </div>
         <div class="event-parameters">
             @for (parameter of parameters(); track parameter.id; let i = $index) {
@@ -62,18 +66,21 @@
         </div>
         <div class="event-new-actions">
             <a routerLink="/styx/events">
-                <p-button pRipple
-                          label="Cancelar"
-                          icon="pi pi-times"
-                          severity="danger" />
+                <button pButton
+                        severity="danger">
+                    <svg data-p-icon="times"
+                         [size]="16"></svg>
+                    Cancelar
+                </button>
             </a>
-            <p-button pRipple
-                      label="Crear evento"
-                      icon="pi pi-check"
-                      type="submit"
-                      [disabled]="form.invalid || submitting()"
-                      [loading]="submitting()"
-                      severity="success" />
+            <button pButton
+                    type="submit"
+                    [disabled]="form.invalid || submitting()"
+                    severity="success">
+                <svg data-p-icon="check"
+                     [size]="ICON_SIZES.NORMAL"></svg>
+                Crear evento
+            </button>
         </div>
     </div>
 </form>

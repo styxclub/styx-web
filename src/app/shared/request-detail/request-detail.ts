@@ -2,6 +2,7 @@ import { Component, computed, inject, OnInit, Signal, signal, WritableSignal } f
 import { FormsModule } from '@angular/forms';
 import AuthStore from '@auth/auth-store';
 import { RequestEnrolled } from '@interfaces/home.interfaces';
+import ICON_SIZES from '@interfaces/icon-sizes.enum';
 import { StatusResponse } from '@interfaces/interfaces';
 import {
   RequestVotesResponse,
@@ -11,17 +12,18 @@ import {
 import Request from '@model/request.model';
 import Vote from '@model/vote.model';
 import { getDate } from '@osumi/tools';
+import { CheckCircle } from '@primeicons/angular/check-circle';
+import { Star } from '@primeicons/angular/star';
 import ClassMapperService from '@services/class-mapper-service';
 import RequestService from '@services/request-service';
 import UserPhoto from '@shared/user-photo/user-photo';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-request-detail',
-  imports: [UserPhoto, ButtonModule, RippleModule, DatePickerModule, FormsModule],
+  imports: [UserPhoto, ButtonModule, DatePickerModule, FormsModule, Star, CheckCircle],
   templateUrl: './request-detail.html',
   styleUrl: './request-detail.scss',
 })
@@ -31,6 +33,7 @@ export default class RequestDetail implements OnInit {
   private readonly requestService: RequestService = inject(RequestService);
   private readonly classMapperService: ClassMapperService = inject(ClassMapperService);
   private readonly authStore: AuthStore = inject(AuthStore);
+  readonly ICON_SIZES = ICON_SIZES;
 
   step: WritableSignal<number> = signal<number>(-1);
 
@@ -99,7 +102,7 @@ export default class RequestDetail implements OnInit {
 
   setVote(vote: Vote, value: number): void {
     this.votes.update((votes: Vote[]): Vote[] =>
-      votes.map((v: Vote): Vote => (v.id === vote.id ? this.setVoteValue(v, value) : v))
+      votes.map((v: Vote): Vote => (v.id === vote.id ? this.setVoteValue(v, value) : v)),
     );
   }
 
@@ -109,7 +112,7 @@ export default class RequestDetail implements OnInit {
     });
     const response: RequestVotesSavedResponse = await this.requestService.saveRequestVotes(
       this.request()?.id ?? 0,
-      votes
+      votes,
     );
     if (response.status === 'ok') {
       this.authStore.updateUser(response.user);

@@ -3,11 +3,21 @@
     <div class="parameter-title">
         <a href="#"
            (click)="selectParameter($event, parameter)">{{ parameter.title }}</a>
-        <p-button [icon]="parameter.show ? 'pi pi-angle-up' : 'pi pi-angle-down'"
-                  [rounded]="true"
-                  [text]="true"
-                  severity="success"
-                  (onClick)="show(parameter)" />
+        <button pButton
+                iconOnly
+                [rounded]="true"
+                [text]="true"
+                severity="success"
+                (click)="show(parameter)">
+            @if (parameter.show) {
+            <svg data-p-icon="angle-up"
+                 [size]="ICON_SIZES.NORMAL"></svg>
+            }
+            @else {
+            <svg data-p-icon="angle-down"
+                 [size]="ICON_SIZES.NORMAL"></svg>
+            }
+        </button>
 
     </div>
     <div class="parameter-body"

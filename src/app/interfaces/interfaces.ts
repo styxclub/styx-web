@@ -1,4 +1,5 @@
 import { ParameterInterface } from '@interfaces/models/parameter.interfaces';
+import { MenuItem } from 'primeng/api';
 
 export interface LoginPayload {
   username: string;
@@ -50,4 +51,8 @@ export interface PositionInterface {
 
 export interface StatusResponse {
   status: string;
+}
+
+export interface AppMenuItem extends MenuItem {
+  iconName?: string;
 }

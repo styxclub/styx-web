@@ -10,11 +10,11 @@ import {
   RequestPayload,
   RequestsResponse,
 } from '@interfaces/home.interfaces';
+import { AppMenuItem } from '@interfaces/interfaces';
 import Chat from '@model/chat.model';
 import Message from '@model/message.model';
 import Request from '@model/request.model';
 import ClassMapperService from '@services/class-mapper-service';
-import { MenuItem } from 'primeng/api';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -25,25 +25,25 @@ export default class HomePageService {
   private readonly apiUrl: string = environment.apiUrl;
 
   _username: WritableSignal<string | undefined> = signal<string | undefined>(
-    this.authStore.user()?.username
+    this.authStore.user()?.username,
   );
   get username(): string | undefined {
     return this._username();
   }
   _reputation: WritableSignal<number | undefined> = signal<number | undefined>(
-    this.authStore.user()?.reputation
+    this.authStore.user()?.reputation,
   );
   get reputation(): number | undefined {
     return this._reputation();
   }
   _votes: WritableSignal<number | undefined> = signal<number | undefined>(
-    this.authStore.user()?.votes
+    this.authStore.user()?.votes,
   );
   get votes(): number | undefined {
     return this._votes();
   }
   _bio: WritableSignal<string | null | undefined> = signal<string | null | undefined>(
-    this.authStore.user()?.bio
+    this.authStore.user()?.bio,
   );
   get bio(): string | null | undefined {
     return this._bio();
@@ -58,7 +58,7 @@ export default class HomePageService {
     return this._boardItems();
   }
 
-  items: MenuItem[] = [];
+  items: AppMenuItem[] = [];
   private onLoadHome!: () => void;
   private onLoadMessages!: () => void;
   private onLoadRequests!: () => void;
@@ -78,17 +78,17 @@ export default class HomePageService {
         items: [
           {
             label: 'Todos',
-            icon: 'pi pi-book',
+            iconName: 'book',
             command: (): void => this.onLoadHome(),
           },
           {
             label: 'Noticias',
-            icon: 'pi pi-sparkles',
+            iconName: 'sparkles',
             command: (): void => this.onLoadMessages(),
           },
           {
             label: 'Eventos',
-            icon: 'pi pi-calendar',
+            iconName: 'calendar',
             command: (): void => this.onLoadRequests(),
           },
         ],
@@ -126,8 +126,8 @@ export default class HomePageService {
     if (response.messages.length > 0) {
       this._boardItems.set(
         response.messages.map(
-          (m: BoardItem): Message => new Message().fromInterface(m.payload as MessagePayload)
-        )
+          (m: BoardItem): Message => new Message().fromInterface(m.payload as MessagePayload),
+        ),
       );
       console.log(this._boardItems());
     }
@@ -143,8 +143,8 @@ export default class HomePageService {
     if (response.requests.length > 0) {
       this._boardItems.set(
         response.requests.map(
-          (m: BoardItem): Request => new Request().fromInterface(m.payload as RequestPayload)
-        )
+          (m: BoardItem): Request => new Request().fromInterface(m.payload as RequestPayload),
+        ),
       );
     }
   }

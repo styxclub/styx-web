@@ -11,7 +11,8 @@
                 <label [class.request-item-user-info-mobile]="isMobile()">{{request().user?.username}}</label>
                 <br>
                 <span>
-                    <i class="pi pi-star"></i> {{request().user?.reputation}} ({{request().user?.votes}})
+                    <svg data-p-icon="star"
+                         [size]="ICON_SIZES.LARGE"></svg> {{request().user?.reputation}} ({{request().user?.votes}})
                 </span>
             </div>
         </div>
@@ -27,7 +28,8 @@
         <div class="request-item-info">
             <div class="request-item-reward">
                 <span [pTooltip]="`Recompensa: ${request().reward} créditos`">
-                    <i class="pi pi-dollar"></i> {{request().reward}}
+                    <svg data-p-icon="dollar"
+                         [size]="ICON_SIZES.LARGE"></svg> {{request().reward}}
                 </span>
             </div>
             <div class="request-item-parameters">
@@ -63,14 +65,16 @@
             @if (request().status === 0) {
             <div class="request-item-action">
                 @if (request().isEnrolled) {
-                <p-button pRipple
-                          label="Desapúntate"
-                          severity="danger" />
+                <button pButton
+                        severity="danger">
+                    Desapúntate
+                </button>
                 }
                 @else {
-                <p-button pRipple
-                          label="Apúntate!"
-                          severity="success" />
+                <button pButton
+                        severity="success">
+                    ¡Apúntate!
+                </button>
                 }
             </div>
             }

@@ -1,12 +1,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
     "esModuleInterop": true,
+    "strict": true,
     "noImplicitOverride": true,
+    "forceConsistentCasingInFileNames": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "moduleResolution": "bundler",
@@ -18,17 +17,17 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@auth/*": ["src/app/auth/*"],
-      "@layout/*": ["src/app/layout/*"],
-      "@pages/*": ["src/app/pages/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@env/*": ["src/environments/*"],
-      "@services/*": ["src/app/services/*"],
-      "@guard/*": ["src/app/guard/*"],
-      "@interfaces/*": ["src/app/interfaces/*"],
-      "@interceptors/*": ["src/app/interceptors/*"],
-      "@model/*": ["src/app/model/*"]
+      "@app/*": ["./src/app/*"],
+      "@auth/*": ["./src/app/auth/*"],
+      "@layout/*": ["./src/app/layout/*"],
+      "@pages/*": ["./src/app/pages/*"],
+      "@shared/*": ["./src/app/shared/*"],
+      "@env/*": ["./src/environments/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@guard/*": ["./src/app/guard/*"],
+      "@interfaces/*": ["./src/app/interfaces/*"],
+      "@interceptors/*": ["./src/app/interceptors/*"],
+      "@model/*": ["./src/app/model/*"]
     }
   },
   "angularCompilerOptions": {
@@ -37,5 +36,14 @@
     "strictInputAccessModifiers": true,
     "typeCheckHostBindings": true,
     "strictTemplates": true
-  }
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

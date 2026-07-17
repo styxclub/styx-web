@@ -1,5 +1,15 @@
-import { Component, inject, input, InputSignal, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  inject,
+  input,
+  InputSignal,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
+import ICON_SIZES from '@interfaces/icon-sizes.enum';
 import User from '@model/user.model';
+import { Star } from '@primeicons/angular/star';
 import AuthService from '@services/auth-service';
 import ClassMapperService from '@services/class-mapper-service';
 import UserCacheService from '@services/user-cache-service';
@@ -8,15 +18,16 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-popup-user',
-  imports: [UserPhoto],
+  imports: [UserPhoto, Star],
   templateUrl: './popup-user.html',
   styleUrl: './popup-user.scss',
 })
-export default class PopupUser {
+export default class PopupUser implements OnInit {
   private readonly authService: AuthService = inject(AuthService);
   private readonly classMapperService: ClassMapperService = inject(ClassMapperService);
   private readonly userCacheService: UserCacheService = inject(UserCacheService);
   private readonly config: DynamicDialogConfig = inject(DynamicDialogConfig);
+  readonly ICON_SIZES = ICON_SIZES;
 
   id: InputSignal<number | null> = input<number | null>(null);
   user: WritableSignal<User | null> = signal<User | null>(null);

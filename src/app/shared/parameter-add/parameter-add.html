@@ -44,11 +44,13 @@
     }
     }
     <div class="parameter-add-cost">
-        <i class="pi pi-dollar"></i> {{ parameter().cost }}
+        <svg data-p-icon="dollar"
+             [size]="ICON_SIZES.LARGE"></svg> {{ parameter().cost }}
     </div>
     <a href="#"
        class="parameter-add-remove"
        (click)="removeParameter($event)">
-        <i class="pi pi-times"></i>
+        <svg data-p-icon="times"
+             [size]="ICON_SIZES.LARGE"></svg>
     </a>
 </div>

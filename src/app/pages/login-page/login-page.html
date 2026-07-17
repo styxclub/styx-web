@@ -49,13 +49,14 @@
             </div>
             <ng-template #footer>
                 <div class="flex">
-                    <p-button pRipple
-                              label="Continuar"
-                              class="w-full"
-                              styleClass="w-full"
-                              [disabled]="!isValid() || submitting()"
-                              [loading]="submitting()"
-                              type="submit" />
+                    <button pButton
+                            label="Continuar"
+                            class="w-full"
+                            styleClass="w-full"
+                            [disabled]="!isValid() || submitting()"
+                            type="submit">
+                        Continuar
+                    </button>
                 </div>
             </ng-template>
         </p-card>

@@ -10,7 +10,8 @@
             <label>{{ user()?.username }}</label>
             }
             <span>
-                <i class="pi pi-star"></i> {{ user()?.reputation }} ({{ user()?.votes }})
+                <svg data-p-icon="star"
+                     [size]="ICON_SIZES.LARGE"></svg> {{ user()?.reputation }} ({{ user()?.votes }})
             </span>
         </div>
     </div>

@@ -11,14 +11,12 @@ import { CardModule } from 'primeng/card';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
-import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-login-page',
   imports: [
     CardModule,
     ButtonModule,
-    RippleModule,
     InputTextModule,
     MessageModule,
     FloatLabel,
@@ -47,7 +45,7 @@ export default class LoginPage {
   isValid: Signal<boolean> = computed(
     (): boolean =>
       this.loginForm.username().errors().length === 0 &&
-      this.loginForm.password().errors().length === 0
+      this.loginForm.password().errors().length === 0,
   );
   hidePassword: WritableSignal<boolean> = signal(true);
   submitting: WritableSignal<boolean> = signal(false);

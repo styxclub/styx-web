@@ -2,7 +2,10 @@ import { Component, inject, input, InputSignal, OnDestroy, OnInit } from '@angul
 import { Router } from '@angular/router';
 import AuthStore from '@auth/auth-store';
 import { RequestEnrolled, RequestParameter } from '@interfaces/home.interfaces';
+import ICON_SIZES from '@interfaces/icon-sizes.enum';
 import Request from '@model/request.model';
+import { Dollar } from '@primeicons/angular/dollar';
+import { Star } from '@primeicons/angular/star';
 import PopupEnrolled from '@shared/popup-enrolled/popup-enrolled';
 import PopupEnrolledDirective from '@shared/popup-enrolled/popup-enrolled-directive';
 import PopupParameter from '@shared/popup-parameter/popup-parameter';
@@ -14,7 +17,6 @@ import UserPhoto from '@shared/user-photo/user-photo';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 
@@ -26,9 +28,10 @@ import { TooltipModule } from 'primeng/tooltip';
     PopupEnrolledDirective,
     PopupUserDirective,
     ButtonModule,
-    RippleModule,
     TooltipModule,
     ToastModule,
+    Star,
+    Dollar,
   ],
   templateUrl: './request-item.html',
   styleUrl: './request-item.scss',
@@ -38,6 +41,7 @@ export default class RequestItem implements OnInit, OnDestroy {
   private readonly authStore: AuthStore = inject(AuthStore);
   private readonly router: Router = inject(Router);
   private readonly messageService: MessageService = inject(MessageService);
+  readonly ICON_SIZES = ICON_SIZES;
 
   request: InputSignal<Request> = input.required<Request>();
   isMobile: InputSignal<boolean> = input.required<boolean>();

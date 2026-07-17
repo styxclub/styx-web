@@ -3,12 +3,16 @@
     <div class="header-options">
         <div class="user-credits"
              [pTooltip]="`Tienes ${authStore.credits()} créditos disponibles`">
-            <i class="pi pi-dollar"></i>
-            {{authStore.credits()}}
+            <svg data-p-icon="dollar"
+                 [size]="ICON_SIZES.LARGE"></svg>
+            {{ authStore.credits() }}
         </div>
-        <p-button pRipple
-                  icon="pi pi-power-off"
-                  pTooltip="Cerrar sesión"
-                  (onClick)="logout()" />
+        <button pButton
+                iconOnly
+                pTooltip="Cerrar sesión"
+                (click)="logout()">
+            <svg data-p-icon="power-off"
+                 [size]="ICON_SIZES.NORMAL"></svg>
+        </button>
     </div>
 </div>

@@ -1,9 +1,11 @@
 <div class="events-header">
     <div class="events-title">Eventos</div>
     <a routerLink="/styx/event-new">
-        <p-button pRipple
-                  label="Crear evento"
-                  icon="pi pi-plus"
-                  severity="success" />
+        <button pButton
+                severity="success">
+            <svg data-p-icon="plus"
+                 [size]="ICON_SIZES.NORMAL"></svg>
+            Crear evento
+        </button>
     </a>
 </div>

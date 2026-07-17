@@ -8,12 +8,14 @@
         <div class="user-info">
             {{ enrollment.username }}
             <span>
-                <i class="pi pi-star"></i> {{ enrollment.reputation }} ({{ enrollment.votes }})
+                <svg data-p-icon="star"
+                     [size]="ICON_SIZES.LARGE"></svg> {{ enrollment.reputation }} ({{ enrollment.votes }})
             </span>
         </div>
         @if (enrollment.status === 1) {
         <div class="user-accepted">
-            <i class="pi pi-check-circle"></i>
+            <svg data-p-icon="check-circle"
+                 [size]="ICON_SIZES.LARGE"></svg>
         </div>
         }
     </div>
